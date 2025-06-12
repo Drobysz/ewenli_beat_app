@@ -1,0 +1,34 @@
+{
+    "main": {
+        "title": "Main Page",
+        "description" : "Buy licenses for exclusive music beats: royalty-free, instant access, and secure payment. Start creating hits today!"
+    },
+    "legal_docs": {
+        "title": "Legal docs",
+        "description" : "licensing terms, privacy policy, and user agreement for the safe and lawful use of beats."
+    },
+    "seller": {
+        "title": "About the seller",
+        "description" : "a professional music producer specializing in high-quality exclusive beats, with a proven track record, client testimonials, and easy contact options."
+    },
+    "shop": {
+        "title": "Shop",
+        "description" : "choose from a wide collection of exclusive tracks and license them online in just a few clicks."
+    },
+    "inventory": {
+        "title": "Inventory",
+        "description" : "Beats shop: choose from a wide collection of exclusive tracks and license them online in just a few clicks."
+    },
+    "basket": {
+        "title": "Basket",
+        "description" : "review your selected beats, verify license types and order total before checkout. A convenient and secure purchase process."
+    },
+     "login": {
+        "title": "login",
+        "description" : "Securely log in to your account to access your purchased beats, manage licenses, and customize your profile with ease."
+    },
+     "register": {
+        "title": "register",
+        "description" : "Create a free account to browse, purchase, and download exclusive royalty-free music beats. Fast signup and secure verification."
+    }
+}

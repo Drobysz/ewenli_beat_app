@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+    /* palette of the shades of gray */
+    --color-gray-50: #979696;
+    --color-gray-100: #8E8787;
+    --color-gray-200: #504E4E;
+    --color-gray-300: #363434;
+    --color-gray-400: #302E2E;
+    --color-gray-500: #201F1F;
+    --color-gray-600: #131313;
+    --color-gray-700: #33363F;
+    --color-gray-800: #17181C;
+    --color-gray-900: #191818;
+
+    /* The other multicolored colors */
+    --color-pinkish : #953396;
+    --color-blue : #0F1EF0;
+    --color-gold : #E2BA41;
+    --color-dark-gold : #92792E;
+    --color-red-proj : #FF0000;
+    --color-red-burgundy: #880808;
+    --color-link-blue : #78A0FF;
+    --color-dark-blue: #00008B;
+
+    /* text shadow */
+    --drop-shadow-text-link: 0px 0px 5px #00F5FD;
+    --drop-shadow-text-white: 0px 0px 3px black;
+};
+
+.text-stroke-3 {
+    -webkit-text-stroke: 3px black;
+};
+
+/* Cursor customisation */
+body {
+    cursor: url('/cursor/mouse.png') 0 0, pointer;
+};
+
+.cursor-pointer {
+    cursor: url('/cursor/pointer.png') 0 0, pointer;
+};
+
+@theme inline {
+  --animate-aurora: aurora 60s linear infinite;
+  @keyframes aurora {
+    from {
+      background-position:
+        50% 50%,
+        50% 50%;
+    }
+    to {
+      background-position:
+        350% 50%,
+        350% 50%;
+    }
+  }
+}

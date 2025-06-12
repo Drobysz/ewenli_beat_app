@@ -1,0 +1,1 @@
+export type pagename = 'main' | 'legal_docs' | 'inventory' | 'shop' | 'seller';

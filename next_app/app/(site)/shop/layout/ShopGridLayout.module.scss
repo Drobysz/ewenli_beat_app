@@ -1,0 +1,25 @@
+.wrapper{
+    display: grid;
+    min-height: 100vh;
+    grid-template-columns: minmax(200px, 300px) minmax(300px, 1fr);
+    grid-template-rows: 90px 1fr;
+    grid-template-areas: 
+    "logo search"
+    "categories songs";
+};
+
+.logo{
+    grid-area: logo;
+};
+
+.search{
+    grid-area: search;
+};
+
+.categories{
+    grid-area: categories;
+};
+
+.songs{
+    grid-area: songs;
+};
