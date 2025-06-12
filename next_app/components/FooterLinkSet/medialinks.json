@@ -1,0 +1,77 @@
+[
+    {
+        "name" : "site creator's links",
+        "category": "developer",
+        "color": "text-pinkish",
+        "links": [
+            {
+                "mediaName": "telegram",
+                "link": "#"
+            },
+            {
+                "mediaName": "linkedin",
+                "link": "#"
+            },
+            {
+                "mediaName": "github",
+                "link": "#"
+            },
+            {
+                "mediaName": "developer",
+                "link": "#"
+            }
+        ]
+    },
+  
+    {
+        "name": "music creator's links",
+        "category": "seller",
+        "color": "text-blue",
+        "links": [
+            {
+                "mediaName": "telegram",
+                "link": "#"
+            },
+            {
+                "mediaName": "vk",
+                "link": "#"
+            },
+            {
+                "mediaName": "instagram",
+                "link": "#"
+            },
+            {
+                "mediaName": "steam",
+                "link": "#"
+            },
+            {
+                "mediaName": "what'sup",
+                "link": "#"
+            }
+        ]
+    },
+
+    {
+        "name": "different pages",
+        "category": "pages",
+        "color": "text-gold",
+        "links": [
+            {
+                "mediaName": "legal docs",
+                "link": "#"
+            },
+            {
+                "mediaName": "shop",
+                "link": "#"
+            },
+            {
+                "mediaName": "inventory",
+                "link": "#"
+            },
+            {
+                "mediaName": "about seller",
+                "link": "#"
+            }
+        ]
+    }
+]

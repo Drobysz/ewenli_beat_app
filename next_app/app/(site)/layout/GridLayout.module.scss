@@ -1,0 +1,40 @@
+.wrapper {
+    display: grid;
+    background-color: #0a0a0a;
+    grid-template-columns: auto minmax(320px, 1440px) auto;
+    grid-auto-rows: auto 1fr auto;
+    min-height: 100vh;
+    grid-template-areas: 
+    "header header header"
+    ". main ."
+    "footer  footer footer";
+};
+
+// Grid area and display setting
+
+.header {
+    grid-area: header;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.main {
+    grid-area: main;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+// Mobile layout
+
+@media (max-width: 1280px) {
+    .wrapper {
+        grid-template-columns: minmax(320px, 1fr);
+        grid-template-areas: 
+            "header"
+            "main"
+            "footer";
+    }
+}

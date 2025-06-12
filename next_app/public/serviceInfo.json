@@ -1,0 +1,22 @@
+[
+    {
+        "title": "INSTANT ACCESS",
+        "image": "locker.png",
+        "description": "The entire service is optimized for real-time creativity. You don’t need to pause your workflow to dig through endless menus or go through sign-up hoops. Whether you’re producing late at night or during a tight session, you can grab exactly what you need in seconds. All sounds are organized, searchable, and easy to test in your project, so you can stay in your zone and keep building without distraction.",
+        "key": 1
+    },
+
+    {
+        "title": "HANDCRAFTED SAMPLES",
+        "image": "volume.png",
+        "description": "Each sound you hear was designed from scratch by the artist — no reused packs, no bland presets, and no copy-paste loops. Every kick, glitch and texture was made with intention to carry emotion and energy. The goal is to create tools that don’t just fill space, but elevate the track. These samples are especially tailored for multiple styles and layered, processed, and tweaked to hit just right out of the box, no extra mixing needed.",
+        "key": 2
+    },
+
+    {
+        "title": "COMMUNITY-DRIVEN",
+        "image": "community.png",
+        "description": "This platform is built around real connection — not just downloads. The Telegram channel is the heart of the service, where exclusive packs drop first, works in progress are shared. You’re not just a buyer here — you’re part of an evolving creative loop. If you’re looking for a certain mood, texture, or even a whole new vibe, just ask. The artist is there, reading, responding, and often creating directly based on feedback.",
+        "key": 3
+    }
+]
