@@ -5,7 +5,7 @@
 
 <!-- Accessability -->
 # Site IP adress: http://116.203.26.181:3000
-# Domain name: www.ewenli-shop.online 
+# Domain name: www.ewenli-shop.uk 
 
 **!The domain is temporarily inaccessible, since it is still in the process of registration.!**   
 
