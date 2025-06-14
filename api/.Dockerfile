@@ -16,6 +16,8 @@ WORKDIR /var/www/html
 # Copying of the api directory
 COPY . .
 
+RUN composer install
+
 # Setting of port
 EXPOSE 8000
 
