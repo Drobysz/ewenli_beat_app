@@ -24,7 +24,7 @@ export const AccountElement = () => {
     const { setModalWindow, setMenuWindow } = useContext(SiteContext);
 
     // Hover state
-    const [ isHovered, setHover ] = useState<boolean>(false);
+    const [ isHovered, setHover ] = useState(false);
 
     return (
         token

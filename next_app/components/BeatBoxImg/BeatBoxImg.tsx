@@ -13,7 +13,7 @@ import cn from 'classnames';
 
 export const BeatBoxImg: FC<BeatBoxImgProps> = ({imgUrl, isPlaying, mode, handleResumeClick})=> {
     // Hover state of beat covers
-    const [ isHovered, setHover ] = useState<boolean>(false);
+    const [ isHovered, setHover ] = useState(false);
 
     return (
         <div 
@@ -25,8 +25,8 @@ export const BeatBoxImg: FC<BeatBoxImgProps> = ({imgUrl, isPlaying, mode, handle
                 backgroundPosition: "center",
             }}
 
-            onMouseEnter={()=> setHover(!isHovered)}
-            onMouseLeave={()=> setHover(!isHovered)}
+            onMouseEnter={()=> setHover(true)}
+            onMouseLeave={()=> setHover(false)}
         >
             {
                 mode === 'shop' && (
