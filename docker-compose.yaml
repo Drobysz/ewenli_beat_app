@@ -32,9 +32,7 @@ services:
     container_name: laravel_api
     restart: restart
     volumes:
-      - ./ewenli-api:/var/www/html    
-    env_file:
-      - ./ewenli-api/.env
+      - ./api:/var/www/html    
     networks:
       - app-network
     depends_on:
@@ -42,6 +40,20 @@ services:
       - redis
     ports:
       - "8000:8000"  
+
+    next:
+      build:
+        context: ./next_app
+        dockerfile: Dockerfile
+        container_name: next_app
+        volumes:
+          - ./next_app:/app
+        networks:
+          - app-network
+        depends_on:
+          - api
+        ports:
+          - "3000:3000"
 
 volumes:
   mysql_data:
