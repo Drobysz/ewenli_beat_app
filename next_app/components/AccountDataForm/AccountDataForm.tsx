@@ -24,9 +24,9 @@ export const AccountDataForm: FC<AccountDataFormProps> = ({formType}) => {
     // Environment variables
     const { token, name: nickname, email, setName, setEmail } = useContext(AppContext);
     // Current Form content
-    const [ formContent, setFormContent ] = useState<string>('');
+    const [ formContent, setFormContent ] = useState('');
     // Response 
-    const [ message, setMessage ] = useState<string>('');
+    const [ message, setMessage ] = useState('');
     // Color os status
     const [ statusColor, setStatusColor ] = useState<'red' | 'green'| 'none'>('none');
 

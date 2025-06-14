@@ -19,11 +19,11 @@ import cn from 'classnames';
 
 export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode })=> {
     // Scale state
-    const [ scaleState, setScaleState ] = useState<boolean>(false);
+    const [ scaleState, setScaleState ] = useState(false);
     // Display state
-    const [ displayState, setDisplayState ] = useState<boolean>(true);
+    const [ displayState, setDisplayState ] = useState(true);
     // Play state
-    const [ isPlaying, setPlay ] = useState<boolean>(false);
+    const [ isPlaying, setPlay ] = useState(false);
     // Current beat
     const { currentBeat, isPlayerVisible, beatId, setCurrentBeat, setPlayerVisibility, setBeatId } = useContext(SiteContext);
 

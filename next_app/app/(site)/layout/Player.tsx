@@ -22,11 +22,11 @@ export const Player = ()=> {
     // Context States
     const { beatId, isPlayerVisible, currentBeat, setBeatId, setPlayerVisibility, setCurrentBeat } = useContext(SiteContext);
     // Audio Tag States
-    const [ duration, setDuration ] = useState<number>(0);
-    const [ currentTime, setCurrentTime ] = useState<number>(0);
+    const [ duration, setDuration ] = useState(0);
+    const [ currentTime, setCurrentTime ] = useState(0);
 
     // Volume states
-    const [ isSoundVisible, setSoundVisibility ] = useState<boolean>(false);
+    const [ isSoundVisible, setSoundVisibility ] = useState(false);
 
     // Setting up of a new track
     useEffect(()=> {
