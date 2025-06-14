@@ -16,6 +16,7 @@ WORKDIR /var/www/html
 # Copying of the api directory
 COPY . .
 
+# Download dependencies
 RUN composer install
 
 # Setting of port
