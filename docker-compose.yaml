@@ -30,7 +30,7 @@ services:
       context: ./api           
       dockerfile: Dockerfile
     container_name: laravel_api
-    restart: restart
+    restart: always
     volumes:
       - ./api:/var/www/html    
     networks:
@@ -46,6 +46,7 @@ services:
       context: ./next_app
       dockerfile: Dockerfile
     container_name: next_app
+    restart: always
     volumes:
       - ./next_app:/app
     networks:
