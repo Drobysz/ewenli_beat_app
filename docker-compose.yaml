@@ -45,15 +45,15 @@ services:
     build:
       context: ./next_app
       dockerfile: Dockerfile
-      container_name: next_app
-      volumes:
-        - ./next_app:/app
-      networks:
-        - app-network
-      depends_on:
-        - api
-      ports:
-        - "3000:3000"
+    container_name: next_app
+    volumes:
+      - ./next_app:/app
+    networks:
+      - app-network
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
 
 volumes:
   mysql_data:
