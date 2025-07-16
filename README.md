@@ -3,19 +3,17 @@
 # A project made within the framework of SAE203 by Alexander Drabysheuski #
 
 
-<!-- Accessability -->
+*** Accessability ***
 # Site IP adress: http://116.203.26.181:3000
-# Domain name: www.ewenli-shop.uk 
-
-**!The domain is temporarily inaccessible, since it is still in the process of registration.!**   
+# Domain name: ewenli-shop.uk  
 
 
- <!-- Short description of the site -->
+*** Short description of the site ***
 
 - It represents a store where you can listen musical beats of an individual author and purchase them. Buying a beat you acquire a license for it which permits you to use it for commercial purposes.
 
 
-<!-- Used Technologies -->
+*** Used Technologies ***
 
 ### Front-end
 - **Next.js** - client-related part of the site (React + SSR)
@@ -37,7 +35,7 @@
 - **PM2** - process manager
 
 
-<!-- Project functionality -->
+*** Project functionality ***
 
 ### The project supports:
 - user registration and authentication
@@ -47,7 +45,7 @@
 - storing audio files on AWS S3
 
 
-<!-- Instruction for running of the project locally on PC  -->
+*** Instruction for running of the project locally on PC  ***
 
 **1 Install All Necessary Dependencies**
 
