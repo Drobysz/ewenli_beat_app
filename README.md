@@ -1,19 +1,19 @@
-### Ewenli beat shop### 
+# Ewenli beat shop
 
-# A project made within the framework of SAE203 by Alexander Drabysheuski #
-
-
-*** Accessability ***
-# Site IP adress: http://116.203.26.181:3000
-# Domain name: ewenli-shop.uk  
+# A project made within the framework of SAE203 by Alexander Drabysheuski
 
 
-*** Short description of the site ***
+## How can you access the shop ?
+### Site IP adress: http://116.203.26.181:3000
+### Domain name: ewenli-shop.uk  
+
+
+## Short description of the site
 
 - It represents a store where you can listen musical beats of an individual author and purchase them. Buying a beat you acquire a license for it which permits you to use it for commercial purposes.
 
 
-*** Used Technologies ***
+## Used Technologies
 
 ### Front-end
 - **Next.js** - client-related part of the site (React + SSR)
@@ -35,7 +35,7 @@
 - **PM2** - process manager
 
 
-*** Project functionality ***
+## Project functionality 
 
 ### The project supports:
 - user registration and authentication
@@ -45,30 +45,27 @@
 - storing audio files on AWS S3
 
 
-*** Instruction for running of the project locally on PC  ***
+## Instruction for running of the project locally on PC  
 
-**1 Install All Necessary Dependencies**
+## 1 Install All Necessary Dependencies
 
-## Mac
+### Mac
 - brew install docker docker-composer npm
-## Window (Install WSL before using apt)
+### Window (Install WSL before using apt)
 - sudo apt update
 - sudo apt install unzip git npm docker.io docker-compose -y
 
-**2 Initialize containerization**
+## 2 Initialize containerization
 
-# In terminal (of Visual Code for example) write the following command:
+### In terminal (of Visual Code for example) write the following command:
 - docker-compose up -d --build
 
-**3 Initialize Laravel**
+## 3 Initialize Laravel
 
-# Open the directory next_app and write the next commands
+### Open the directory next_app and write the next commands
 - npm install
 - npm run build
 - npm run start
 
-# Follow this localhost url and enjoy the site
+### Follow this localhost url and enjoy the site
 - localhost:3000
-
-
-# MIT License — free to use, copy, modify
