@@ -5,11 +5,11 @@ import { createContext, ReactNode, useState, useEffect, Dispatch, SetStateAction
 
 interface AppContextInterface {
     token: string | null;
-    name: string | null;
+    name:  string | null;
     email: string | null;
 
     setToken: Dispatch<SetStateAction<string | null>>;
-    setName: Dispatch<SetStateAction<string | null>>;
+    setName:  Dispatch<SetStateAction<string | null>>;
     setEmail: Dispatch<SetStateAction<string | null>>;
 
     isReady: boolean;           
@@ -17,11 +17,11 @@ interface AppContextInterface {
 
 export const AppContext = createContext<AppContextInterface>({
     token: '',
-    name: null,
+    name:  null,
     email: null,
     
     setToken: () => {},
-    setName: () => {},
+    setName:  () => {},
     setEmail: () => {},
 
     isReady: false         
@@ -29,7 +29,7 @@ export const AppContext = createContext<AppContextInterface>({
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const [ token, setToken ] = useState<string | null>(null);
-    const [ name, setName ] = useState<string | null>(null);
+    const [ name, setName ]   = useState<string | null>(null);
     const [ email, setEmail ] = useState<string | null>(null);
 
     const [isReady, setIsReady] = useState(false);
@@ -38,7 +38,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         const t = sessionStorage.getItem('token');
         const n = sessionStorage.getItem('name');
         const e = sessionStorage.getItem('email');
-
 
         setToken(t);
         setName(n);
