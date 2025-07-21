@@ -53,16 +53,16 @@ export const CustomBtn: FC<BtnProps> = ({
     }, []);
 
     async function handleBtnClick () {
-        const sessionData: UserSession = await getSessionData();
+        const sessionData: UserSession | undefined = await getSessionData();
         switch (btnType) {
             case 'basket':
-                if (sessionData.token !== undefined)
-                    setProductToBasket(sessionData.token, idx!);
+                if (sessionData !== undefined)
+                    setProductToBasket(sessionData.token!, idx!);
 
                 break;
             case 'delete':
-                if (sessionData.token !== undefined)
-                    deleteProductFromBasket(sessionData.token, idx!);
+                if (sessionData !== undefined)
+                    deleteProductFromBasket(sessionData.token!, idx!);
 
                 if(setDisplayState)
                     setDisplayState(false); 
