@@ -1,9 +1,10 @@
-'use client'
-
 // Components
 import Image from "next/image";
-import { DarkForm, SocialAuthBtn, AuthBtn, BackBtn } from '@/components/index';
+import { SocialAuthBtn, BackBtn } from '@/components/index';
 import Link from "next/link";
+
+// Form 
+import { RegForm } from "./RegForm/RegForm"
 
 // Font
 import { fs163, avenir } from '@/fonts/fonts';
@@ -11,54 +12,7 @@ import { fs163, avenir } from '@/fonts/fonts';
 // Deps
 import cn from 'classnames';
 
-// Context 
-import { AuthContext } from "../context/auth.context";
-import { AppContext } from "@/app/context/app.context";
-
-// Hooks
-import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
-
-// Helpers
-import { register } from "@/helpers/authenfication";
-
-// Props
-import { UserReg } from "@/interfaces/UserData.interface";
-
-export default function Page() {
-    // Rotuer
-    const router = useRouter();
-    // Error message
-    const [ error, setError ] = useState('');
-    // Input form data
-    const { authData } = useContext(AuthContext);
-    const { setEmail, setName, setToken } = useContext(AppContext);
-
-    // Request to the API
-    const handleSubmit = async () => {
-        const res = await register(authData.name, authData.email, authData.password, authData.password_confirmation);
-        const data: UserReg = await res.json();
-
-        if (res.ok){
-            if (!data.message){
-                sessionStorage.setItem('token', data.token);
-                sessionStorage.setItem('name', data.user.name);
-                sessionStorage.setItem('email', data.user.email);
-                
-                setToken(data.token);
-                setName(data.user.name);
-                setEmail(data.user.email);
-
-                router.push('/');
-            } else {
-                setError(data.message);
-            }
-        } else {
-            setError('Your credentials are incorrect')
-        }
-
-    }
-
+export default function RegisterPage() {
     return (
         <div 
             className="h-fit w-full backdrop-blur-xl bg-link-blue/10 overflow-hidden pt-5 pb-3 px-5 rounded-3xl border-1 border-zinc-700"
@@ -86,18 +40,7 @@ export default function Page() {
                 <div className="h-[2px] w-full bg-gray-200/50"/>
             </div>
 
-            <form className="flex flex-col gap-3 text-white mb-8">
-                <DarkForm formType="name" error={error}/>
-                <DarkForm formType="email" error={error}/>
-                <DarkForm formType="password" error={error}/>
-                <DarkForm formType="password_confirmation" error={error}/>
-            </form>
-
-            <AuthBtn 
-                className="mb-2"
-                btnType="register"
-                onClick={()=> handleSubmit()}
-            />
+            <RegForm />
 
             <p className={cn(avenir.className, "text-center text-md text-white")}>
                 If you are already registered, there is a 
