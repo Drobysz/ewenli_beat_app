@@ -1,3 +1,5 @@
+"use client"
+
 // Props
 import { FC, ChangeEvent } from "react";
 import { DarkFormProps } from "./DarkForm.props";
@@ -11,19 +13,19 @@ import { AuthData } from "@/interfaces/AuthData.interface";
 
 export const DarkForm: FC<DarkFormProps> = ({formType, error}) => {
     const { setAuthData, authData } = useContext(AuthContext);
+
     const placeholders: Record<DarkFormProps['formType'], string> = {
-        name: 'mega_awesome_nickname123',
-        email: 'Email',
-        password: '••••••••••••',
+        name:                  'mega_awesome_nickname123',
+        email:                 'Email',
+        password:              '••••••••••••',
         password_confirmation: 'confirm your password',
     };
     const formTypeLib: Record<DarkFormProps['formType'], string> = {
-        name: 'text',
-        email: 'email',
-        password: 'password',
+        name:                  'text',
+        email:                 'email',
+        password:              'password',
         password_confirmation: 'password',
     };
-    
 
     const handleForm = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
