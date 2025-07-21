@@ -134,6 +134,7 @@ export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode }
                             mode === 'basket' && (
                                 <CustomBtn 
                                     color="red-ghost"
+                                    className="w-fit h-fit"
                                     size="medium"
                                     idx={beat.id}
                                     btnType="delete"
