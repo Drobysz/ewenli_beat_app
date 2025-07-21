@@ -8,22 +8,22 @@ import { Categories } from "@/interfaces/Products.interface";
 import { getCategoryList } from "@/helpers/productsRequest";
 
 interface ShopInterface {
-    searchBarRequest : string;
-    categoryList: Categories[];
+    searchBarRequest :    string;
+    categoryList:         Categories[];
     filteredCategoryList: Categories[];
 
-    setSearchBarRequest: Dispatch<SetStateAction<string>>;
-    setCategoryList: Dispatch<SetStateAction<Categories[]>>;
+    setSearchBarRequest:     Dispatch<SetStateAction<string>>;
+    setCategoryList:         Dispatch<SetStateAction<Categories[]>>;
     setFilteredCategoryList: Dispatch<SetStateAction<Categories[]>>;
 }
 
 export const ShopContext = createContext<ShopInterface>({
-    searchBarRequest: '',
-    categoryList: [],
+    searchBarRequest:     '',
+    categoryList:         [],
     filteredCategoryList: [],
     
-    setSearchBarRequest: () => {},
-    setCategoryList: () => {},
+    setSearchBarRequest:     () => {},
+    setCategoryList:         () => {},
     setFilteredCategoryList: () => {}
 });
 
@@ -38,10 +38,8 @@ export const ShopContextProvider = ({ children }: { children: ReactNode }) => {
     useEffect(()=>{
         async function fetchCategoryList() {
             const list = await getCategoryList();
-
             setCategoryList(list);
         }
-
         fetchCategoryList();
     }, []);
 
