@@ -1,9 +1,9 @@
 'use client'
 
 // Hooks
-import React, { FC, useRef, useState, useContext, useEffect } from "react";
+import React, { FC, useRef, useState, useEffect, useContext } from "react";
 import { usePathname } from "next/navigation";
-import { useMediaQuery } from 'react-responsive';
+import { useWindowWidth } from "@/hooks/useWindowWidth";
 
 // framer-motion
 import { motion } from "framer-motion";
@@ -21,80 +21,59 @@ import { avenir } from "@/fonts/fonts";
 import Link from "next/link";
 
 // Context
-import { AppContext } from "@/app/context/app.context";
-
+import { SiteContext } from "@/app/(site)/context/site.context";
 
 export const NavBar = () => {
-    const { token } = useContext(AppContext);
+    const { sessionData } = useContext(SiteContext);
+
     // List of tabs
     const baseTabs = [
-        { href: '/legal_docs', label: 'legal docs' },
+        { href: '/',       label: 'main page' },
         { href: '/seller', label: 'about the seller' },
-        { href: '/shop', label: 'shop' },
+        { href: '/shop',   label: 'shop' },
     ];
-
     const authTabs = [
         { href: '/inventory', label: 'inventory' },
-        { href: '/basket', label: 'basket' },
+        { href: '/basket',    label: 'basket' },
     ];
 
-    const tabs = token ? [...baseTabs, ...authTabs] : baseTabs;
-
-    const [position, setPosition] = useState<CursorPosition>({
-        left: 0,
-        width: 0,
-    });
-
-    const [positionClicked, setPositionClicked] = useState<CursorPosition>({
-        left: 0,
-        width: 0,
-    });
-
+    const tabs = sessionData !== undefined ? [...baseTabs, ...authTabs] : baseTabs;
     const pathname = usePathname();
 
-    useEffect(()=> {
-        if (pathname === '/') {
-            setPositionClicked({
-                left: 0,
-                width: 0,
-            });
+    const defaultCoord = { left:0, width: 0 };
 
-            setPosition({
-                left: 0,
-                width: 0,
-            });
-        }
-    }, [pathname]);
+    // Postition states
+    const [position, setPosition] = useState<CursorPosition>(defaultCoord);
+    const [positionClicked, setPositionClicked] = useState<CursorPosition>(defaultCoord);
 
     return (
-    <ul
-        onMouseLeave={() => setPosition(positionClicked)}
-        className="relative mx-auto flex w-fit rounded-full bg-[#212020] p-1 max-[790px]:hidden"
-    >
-        {
-            tabs.map((tab) => (
-                <Tab
-                    key={tab.href}
-                    href={tab.href}
-                    isActive={pathname === tab.href}
-                    setPosition={setPosition}
-                    setPositionClicked={setPositionClicked}
-                >
-                    {tab.label}
-                </Tab>
-            ))
-        }
+        <ul
+            onMouseLeave={() => setPosition(positionClicked)}
+            className="relative mx-auto flex w-fit rounded-full bg-[#212020] p-1 max-[790px]:hidden"
+        >
+            {
+                tabs.map((tab) => (
+                    <Tab
+                        key={tab.href}
+                        href={tab.href}
+                        isActive={pathname === tab.href}
+                        setPosition={setPosition}
+                        setPositionClicked={setPositionClicked}
+                    >
+                        {tab.label}
+                    </Tab>
+                ))
+            }
 
-        <Cursor position={position} />
-    </ul>
+            <Cursor position={position} />
+        </ul>
     );
 };
 
 const Tab: FC<Tabprops> = ({ children, isActive, href, setPosition, setPositionClicked }) => {
     const ref = useRef<HTMLLIElement>(null!);
-    const pathname = usePathname();
-    const isLess1040 = useMediaQuery({ query: '(min-width: 1040px)' });
-    const isMore1040 = useMediaQuery({ query: '(max-width: 1040px)' });
+    const windowWidth = useWindowWidth();
+    const isWindowLess1040 = windowWidth <= 1040;
 
     useEffect(() => {
         if (isActive) {
@@ -102,23 +81,23 @@ const Tab: FC<Tabprops> = ({ children, isActive, href, setPosition, setPositionC
             setPositionClicked({ left, width });
             setPosition({ left, width });
         }
-    }, [pathname, isLess1040, isMore1040]);
+    }, [isWindowLess1040]);
 
     const handleInteraction = (interaction: 'hover' | 'click')=> {
         const { width } = ref.current.getBoundingClientRect();
         const left = ref.current.offsetLeft;
 
-        if (interaction === 'click') {
-            setPositionClicked({
-                left,
-                width
-            })
-        } else if (interaction === 'hover') {
-            setPosition({
-                left,
-                width
-            });
-        };
+        const coord = { left, width };
+
+        switch (interaction) {
+            case 'click':
+                setPositionClicked(coord);
+                break;
+        
+            case 'hover':
+                setPosition(coord);
+                break;
+        }
     };
         
     return (
@@ -139,7 +118,7 @@ const Cursor = ({ position }: CursorProps) => {
     return (
         <motion.li
             animate={{
-            ...position,
+                ...position,
             }}
             className="absolute z-0 h-8 rounded-full bg-[#E9E9E9] min-[1040px]:h-11"
         />

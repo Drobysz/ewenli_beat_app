@@ -14,20 +14,17 @@ import Image from "next/image";
 import cn from 'classnames';
 
 // Context
-import { AppContext } from "@/app/context/app.context";
 import { SiteContext } from "@/app/(site)/context/site.context";
 
 export const AccountElement = () => {
-    // Global app context
-    const { name, token } = useContext(AppContext);
     // Site group context
-    const { setModalWindow, setMenuWindow } = useContext(SiteContext);
+    const { setModalWindow, setMenuWindow, sessionData } = useContext(SiteContext);
 
     // Hover state
     const [ isHovered, setHover ] = useState(false);
 
     return (
-        token
+        sessionData !== undefined
         ?
             <div className="flex gap-4">
                 <div 
@@ -43,7 +40,7 @@ export const AccountElement = () => {
                         alt="user"
                     />
 
-                    <h2 className={cn("text-xl mr-4 max-[1040px]:hidden", climate_crisis.className)}>{name}</h2>
+                    <h2 className={cn("text-xl mr-4 max-[1040px]:hidden", climate_crisis.className)}>{sessionData.name}</h2>
                 </div>
 
                 <Image 
@@ -57,11 +54,23 @@ export const AccountElement = () => {
             </div>
             
         :
-            <CustomBtn
-                color="blue"
-                link="/login"
-            >
-                Login
-            </CustomBtn>
+            <div className="flex gap-4">
+                <CustomBtn
+                    color="blue"
+                    link="/login"
+                >
+                    Login
+                </CustomBtn>
+
+                <Image 
+                    src='/Menu.svg'
+                    width={40}
+                    height={40}
+                    alt="menu"
+                    className="min-[790px]:hidden hover:scale-110 transition-all duration-500 active:scale-100"
+                    onClick={()=> setMenuWindow(true)}
+                />
+            </div>
+            
     )
 };
