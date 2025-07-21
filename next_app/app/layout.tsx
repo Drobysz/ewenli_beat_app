@@ -1,9 +1,6 @@
 // Tailwind and custom colors import
 import "./globals.css";
 
-// Context Provider
-import { AppContextProvider } from "./context/app.context";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -12,9 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black overflow-x-hidden">
-        <AppContextProvider>
-          {children}
-        </AppContextProvider>
+        {children}
       </body>
     </html>
   );
