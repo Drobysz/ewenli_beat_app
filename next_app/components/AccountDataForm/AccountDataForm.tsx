@@ -58,7 +58,6 @@ export const AccountDataForm = ({
             };
 
             if (sessionData !== undefined) {
-                console.log(newSessionData)
                 setSessionData(newSessionData);
                 await updateSession(newSessionData);
             }
@@ -84,8 +83,6 @@ export const AccountDataForm = ({
             case "name":
                 const resName = await changeNickname(sessionData.token!, formContent);
                 const msgName = await resName.json();
-                console.warn(resName)
-                console.warn(msgName)
                 handleResponse(resName.status, msgName.message);
                 break;
                 
