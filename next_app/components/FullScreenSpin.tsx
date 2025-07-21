@@ -1,7 +1,11 @@
 import { Spin } from 'antd';
 
-export function FullScreenSpin(){
+interface FullScreenSpinProps {
+    size?: "large" | "small"
+}
+
+export function FullScreenSpin({size="large"}: FullScreenSpinProps){
     return(
-        <div className="h-full flex justify-center items-center"><Spin size='large'/></div>
+        <div className="h-full flex justify-center items-center"><Spin size={size}/></div>
     );
 };
