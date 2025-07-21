@@ -1,3 +1,5 @@
+import { JWTPayload } from "jose";
+
 export interface UserLog{
 	user: {
 		id: number,
@@ -19,4 +21,10 @@ export interface UserReg{
 	},
 	token: string;
 	message: string;
+}
+
+export interface UserSession extends JWTPayload {
+	token?: string;
+	name?: string;
+	email?: string;
 }
