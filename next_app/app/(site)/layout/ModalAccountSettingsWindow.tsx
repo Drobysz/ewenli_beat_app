@@ -1,11 +1,10 @@
-'use client'
+"use client"
 
 // Hooks
 import { useContext } from "react";
 
 // Context
 import { SiteContext } from "@/app/(site)/context/site.context";
-import { AppContext } from "@/app/context/app.context"; 
 
 // Components
 import Image from "next/image";
@@ -17,29 +16,16 @@ import { impact, doppelganger, bagel_fat_one } from "@/fonts/fonts";
 // Deps
 import cn from 'classnames';
 
-// Navigation
-import { useRouter } from "next/navigation";
-
 // Helpers
-import { logOut } from "@/helpers/authenfication";
+import { logoutClient } from "@/app/actions/auth";
 
 export const ModalAccountSettingsWindow = ()=> {
     // State of the modal window
-    const { isModalWindowOpen, setModalWindow } = useContext(SiteContext);
-    // Token
-    const { token, setEmail, setName, setToken } = useContext(AppContext);
-    // Router
-    const router = useRouter();
+    const { isModalWindowOpen, setModalWindow, sessionData } = useContext(SiteContext);
 
-    const handleLogOut = async () => {
-        const res = await logOut(token!);
-        if (res.status === 200) {
-            setToken(null);
-            setEmail(null);
-            setName(null);
-            router.push('/login');
-        }
-    };
+    if (!sessionData?.token) {
+        return null;
+    }
 
     return (
         <div
@@ -62,21 +48,25 @@ export const ModalAccountSettingsWindow = ()=> {
                 Account data
             </h1>
 
-            <form className="flex flex-col ite gap-10 h-fit">
+            <div className="flex flex-col ite gap-10 h-fit">
                 <AccountDataForm formType="email"/>
                 <AccountDataForm formType="name"/>
                 <AccountDataForm formType="password"/>
-            </form>
+            </div>
             
-            <div className="grid grid-cols-[1fr_auto] gap-2">
+            <form 
+                className="grid grid-cols-[1fr_auto] gap-2"
+                action={logoutClient}
+            >
                 <h2 className={cn("text-white/40 text-xl", doppelganger.className)}>Do you want to log out? Press this button</h2>
+                <input type="hidden" name="token" value={sessionData.token} />
                 <button
                     className={cn("cursor-pointer border-2 border-red-proj text-red-proj rounded-xl px-3 py-1.5 w-full active:scale-96 hover:scale-x-105 hover:scale-y-102 hover:border-red-burgundy hover:text-red-burgundy transition-all duration-300", impact.className)}
-                    onClick={()=> handleLogOut()}
+                    type="submit"
                 >
                     Log out
                 </button>
-            </div>
+            </form>
             
         </div>
     )
