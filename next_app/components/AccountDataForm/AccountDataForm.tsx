@@ -1,17 +1,16 @@
 'use client'
 
 // Props
-import { FC } from "react";
 import { AccountDataFormProps } from "./AccountDataForm.interface";
 
 // Hooks
-import { useState, useContext } from "react";
-
-// Context
-import { AppContext } from "@/app/context/app.context";
+import { useState, useContext, ChangeEvent } from "react";
 
 // Helpers
 import { changeEmail, changeNickname, changePassword } from '@/helpers/accountDataRequest';
+
+// Sesssion
+import { updateSession } from "@/app/actions/sesssions";
 
 // Fonts
 import { impact, avenir } from "@/fonts/fonts";
@@ -19,57 +18,93 @@ import { impact, avenir } from "@/fonts/fonts";
 // Deps 
 import cn from 'classnames';
 
+// Context
+import { SiteContext } from "@/app/(site)/context/site.context";
+import { FullScreenSpin } from "../FullScreenSpin";
 
-export const AccountDataForm: FC<AccountDataFormProps> = ({formType}) => {
-    // Environment variables
-    const { token, name: nickname, email, setName, setEmail } = useContext(AppContext);
+
+export const AccountDataForm = ({ 
+    formType
+}: AccountDataFormProps) => {
+    // Session Data
+    const { sessionData, setSessionData } = useContext(SiteContext);
     // Current Form content
     const [ formContent, setFormContent ] = useState('');
     // Response 
     const [ message, setMessage ] = useState('');
-    // Color os status
+    // Color of status
     const [ statusColor, setStatusColor ] = useState<'red' | 'green'| 'none'>('none');
+    const [isPending, setPending] = useState(false);
+    
+    if (sessionData === undefined) {
+        return null;
+    }
+
+    // Placeholder content lib
+    const placeholderLib = {
+        name:     sessionData.name!,
+        email:    sessionData.email!,
+        password: '*********'
+    }
+
+    const handleResponse = async (
+        status: number, 
+        message: string, 
+    )=> {
+        if (status === 200){
+            const newSessionData = {
+                ...sessionData!,
+                [formType]: formContent
+            };
+
+            if (sessionData !== undefined) {
+                console.log(newSessionData)
+                setSessionData(newSessionData);
+                await updateSession(newSessionData);
+            }
+
+            setMessage(message);
+            setStatusColor('green');
+        } else {
+            setMessage('Your credentials are not unique');
+            setStatusColor('red');
+        }
+    };
 
     const handleFormRequest = async ()=> {
-        if (formType === 'email'){
-            const res = await changeEmail(token!, formContent);
-            if (res.status === 200){
-                setEmail(formContent);
-                sessionStorage.setItem('email', formContent);
+        setPending(true);
 
-                const resText = await res.json();
-                setMessage(resText.message);
+        switch (formType) {
+            case "email":
+                const resEmail = await changeEmail(sessionData.token!, formContent);
+                const msgEmail = await resEmail.json();
+                handleResponse(resEmail.status, msgEmail.message);
+                break;
+        
+            case "name":
+                const resName = await changeNickname(sessionData.token!, formContent);
+                const msgName = await resName.json();
+                console.warn(resName)
+                console.warn(msgName)
+                handleResponse(resName.status, msgName.message);
+                break;
+                
+            case "password":
+                const resPswrd = await changePassword(sessionData.token!, formContent);
+                const msgPswrd = await resPswrd.json();
+                handleResponse(resPswrd.status, msgPswrd.message);
+                break;
+        }
 
-                setStatusColor('green');
-            } else {
-                setMessage('Your credentials are not unique');
-                setStatusColor('red');
-            }
-            
-        } else if (formType === 'name'){
-            const res = await changeNickname(token!, formContent);
-            if (res.status === 200){
-                setName(formContent);
-                sessionStorage.setItem('name', formContent);
+        setPending(false);
+    }
 
-                const resText = await res.json();
-                setMessage(resText.message);
-                setStatusColor('green');
-            } else {
-                setMessage('Your credentials are not unique');
-                setStatusColor('red');
-            }
-        } else if (formType === 'password'){
-            const res = await changePassword(token!, formContent);
-            if (res.status === 200){
-                const resText = await res.json();
-                setMessage(resText.message);
-                setStatusColor('green');
-            } else {
-                setMessage('Your credentials are not unique');
-                setStatusColor('red');
-            }
-        } 
+    const handleInputValue = (e: ChangeEvent<HTMLInputElement>)=> {
+        setFormContent(e.target.value)
+        if (message !== '') {
+            setMessage('');
+            setStatusColor('none');
+        }
     }
 
     return (
@@ -92,7 +127,7 @@ export const AccountDataForm: FC<AccountDataFormProps> = ({formType}) => {
             </div>
 
             {/* The Form itself */}
-            <div className="grid w-full h-[40px] grid-cols-[1fr_auto] gap-5">
+            <form className="grid w-full h-[40px] grid-cols-[1fr_auto] gap-5">
                 <input 
                     id={formType}
                     type={formType}  
@@ -101,31 +136,18 @@ export const AccountDataForm: FC<AccountDataFormProps> = ({formType}) => {
                         ['border-green-500 focus:drop-shadow-green-500 focus:ring-green-500']: statusColor === 'green',
                         ['border-red-proj focus:drop-shadow-red-proj focus:ring-red-proj']: statusColor === 'red'
                     })}
-                    placeholder={
-                        formType === 'name'
-                        ? nickname!
-                            : formType === 'email'
-                            ? email!
-                                : formType === 'password'
-                                ? '*********'
-                                    : ''
-                    }
-                    onChange={(e)=> {
-                        setFormContent(e.target.value)
-                        if (message !== '') {
-                            setMessage('');
-                            setStatusColor('none');
-                        }
-                    }}
+                    placeholder={placeholderLib[formType]}
+                    onChange={handleInputValue}
                  />
                  {/* Confirm btn */}
                 <button
                     className={cn("cursor-pointer bg-gray-50/40 border border-white/50 rounded-xl text-white px-3 py-1.5 w-full hover:bg-white/50 hover:text-black/50 hover:border-black/50 active:scale-96 active:bg-dark-blue active:text-white/50 transition-all duration-500", impact.className)}
+                    type="button"
                     onClick={handleFormRequest}
                 >
-                    confirm
+                    {isPending ? <FullScreenSpin size="small"/> : "confirm"}
                 </button>
-            </div>
+            </form>
            
         </label>
     );
