@@ -6,7 +6,7 @@ import { Beat } from "@/interfaces/Products.interface";
 import { BeatUrl } from "@/interfaces/s3ElementData.interface";
 
 // Hooks
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useMemo } from "react";
 
 // Context
 import { ShopContext } from "../context/shop.context";
@@ -17,9 +17,9 @@ import { BeatBox } from "@/components/index";
 import { PriceTag } from "@/components/index";
 
 interface ProductsListPageProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>{
-    beats: Beat[];
+    beats:      Beat[];
     beatImages: BeatUrl[];
-    beatFiles: BeatUrl[];
+    beatFiles:  BeatUrl[];
 }
 
 export const ProductsListPage: FC<ProductsListPageProps> = ({ beats, beatImages, beatFiles, ...props })=> {
@@ -27,11 +27,11 @@ export const ProductsListPage: FC<ProductsListPageProps> = ({ beats, beatImages,
     const { searchBarRequest, filteredCategoryList } = useContext(ShopContext);
     const { beatId, setBeatId } = useContext(SiteContext);
     // Price Up/Down
-    const [ priceState, setPriceState ] = useState<boolean>(false);
+    const [ priceState, setPriceState ] = useState(false);
     // Filtered Beats
     const [ filteredBeats, setFilteredBeats ] = useState<Beat[]>(beats);
 
-    useEffect(()=>{
+    const filteredBeatsMemo = useMemo(()=>{
         const searchFilteredBeats = searchBarRequest !== '' 
             ? beats.filter( beat => beat.name.toLowerCase().includes(searchBarRequest.toLowerCase()) ) 
             : beats;
@@ -46,8 +46,10 @@ export const ProductsListPage: FC<ProductsListPageProps> = ({ beats, beatImages,
             : (a.price < b.price ? -1 : 1)
         );
 
-        setFilteredBeats(priceFilteredBeats);
+        return priceFilteredBeats;
     }, [searchBarRequest, filteredCategoryList, priceState, beats]);
+
+    useEffect(() => setFilteredBeats(filteredBeatsMemo), [filteredBeatsMemo]);
 
     useEffect(()=> {
         setBeatId({
