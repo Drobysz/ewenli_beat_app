@@ -4,7 +4,6 @@
 import links from './medialinks.json';
 
 // Props
-import { FC, JSX } from "react";
 import { FooterLinkSetProps, MediaCategory } from "./FooterLinkSetProps";
 
 // Nav hooks
@@ -21,11 +20,11 @@ import { fs163, tronecal } from '@/fonts/fonts';
 import cn from "classnames"
 
 
-export const FooterLinkSet: FC<FooterLinkSetProps> = () => {
+export const FooterLinkSet = ({className}: FooterLinkSetProps) => {
     const router = useRouter();
 
     return (
-        <>
+        <div className={className}>
             <Image
                 className="max-[745px]:hidden hover:opacity-70 hover:scale-105 active:scale-97 transition-all duration-500" 
                 src="/logo.png" 
@@ -36,7 +35,7 @@ export const FooterLinkSet: FC<FooterLinkSetProps> = () => {
             />
 
             {
-                links.map( (category: MediaCategory): JSX.Element => (
+                links.map( (category: MediaCategory) => (
                     <div
                      key={category.category}
                      className='flex flex-col gap-3'
@@ -56,6 +55,6 @@ export const FooterLinkSet: FC<FooterLinkSetProps> = () => {
                     </div>
                 ) )
             }
-        </>
+        </div>
     );
 };
