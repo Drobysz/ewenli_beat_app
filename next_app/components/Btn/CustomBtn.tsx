@@ -91,7 +91,7 @@ export const CustomBtn: FC<BtnProps> = ({
                 ease: 'backInOut'   
             }}
             style={{
-                border: rgb ? border : undefined,
+                border:    rgb ? border : undefined,
                 boxShadow: rgb ? boxShadow : undefined
             }}
             className={cn('flex items-center justify-center gap-[3px] cursor-pointer', className, {
