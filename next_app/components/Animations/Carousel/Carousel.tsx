@@ -47,7 +47,7 @@ const Card: FC<CardProps> = ({ card }) => {
       target="_blank"
     >
       <motion.div
-        className="group relative h-[450px] w-[450px] overflow-hidden bg-neutral-200 cursor-pointer max-[750px]:h-[350px] max-[750px]:w-[350px]"
+        className="group relative h-[450px] w-[450px] overflow-hidden bg-neutral-200 cursor-pointer max-[750px]:h-[350px] max-[750px]:w-[350px] max-[550px]:h-[250px] max-[550px]:w-[250px]"
         whileHover={{boxShadow: '0px 0px 10px 6px white'}}
       >
         <div
@@ -59,7 +59,7 @@ const Card: FC<CardProps> = ({ card }) => {
           className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
         ></div>
         <div className="absolute inset-0 z-10 grid place-content-center">
-          <p className="bg-gradient-to-br text-center w-[300px] from-white/20 to-white/0 p-8 text-3xl font-black uppercase text-white backdrop-blur-lg">
+          <p className="bg-gradient-to-br text-center w-[300px] max-[550px]:w-[200px] from-white/20 to-white/0 p-8 max-[550px]:p-6 text-3xl max-[550px]:text-2xl font-black uppercase text-white backdrop-blur-lg">
             {card.title}
           </p>
         </div>
