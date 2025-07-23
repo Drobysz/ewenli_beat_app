@@ -5,7 +5,7 @@ import { ProductsListPage } from "./layout/ProductsListPage";
 import { Beat } from "@/interfaces/Products.interface";
 import { BeatUrl } from "@/interfaces/s3ElementData.interface";
 
-// Skeleton component/Hooks
+// Skeleton component
 import { FullScreenSpin } from "@/components/index";
 import { Suspense } from "react";
 
