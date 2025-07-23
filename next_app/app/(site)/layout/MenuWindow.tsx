@@ -24,7 +24,6 @@ export const MenuWindow: FC<MenuWindowProps> = ()=> {
     const isMore1040 = useMediaQuery({ query: '(min-width: 790px)' });
     const tabs = [
         { href: '/', label: 'Main Page' },
-        { href: '/legal_docs', label: 'Legal Docs' },
         { href: '/seller', label: 'About the seller' },
         { href: '/shop', label: 'Shop' },
         { href: '/inventory', label: 'Inventory' },
