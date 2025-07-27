@@ -61,7 +61,7 @@ export const ProductsListPage: FC<ProductsListPageProps> = ({ beats, beatImages,
     return (
         <div
             {...props}
-            className="border-t-1 border-l-1 border-dashed border-gray-700 h-[100vh] box-border px-5 py-6 justify-center"
+            className="border-t-1 border-l-1 border-dashed border-gray-700 h-[100vh] box-border px-5 py-6  max-[510px]:py-3 max-[510px]:px-2 justify-center"
         >
             <PriceTag 
                 setPriceState={setPriceState}

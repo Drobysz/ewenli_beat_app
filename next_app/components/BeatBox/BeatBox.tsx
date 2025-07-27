@@ -1,7 +1,7 @@
 'use client'
 
 // Props/Hooks
-import { FC, useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import BeatBoxProps from "./BeatBox.interface";
 
 // Font 
@@ -17,7 +17,13 @@ import { SiteContext } from "@/app/(site)/context/site.context";
 // Dep
 import cn from 'classnames';
 
-export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode })=> {
+export const BeatBox = ({ 
+    beat, 
+    beatImg, 
+    beatFile, 
+    idx, 
+    mode 
+}: BeatBoxProps)=> {
     // Scale state
     const [ scaleState, setScaleState ] = useState(false);
     // Display state
@@ -86,13 +92,11 @@ export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode }
             ['flex']: displayState,
             ['hidden']: displayState === false
         })}>
-            <span 
-                className={cn('text-3xl text-white', impact.className)}
-            >
+            <span className={cn('text-3xl text-white max-[580px]:text-xl', impact.className)}>
                 {idx+1}
             </span>
-            <div className="bg-gray-800 rounded-[2rem] h-fit w-[90%] hover:bg-gray-800/65 transition-all duration-500 p-4 flex flex-col gap-4">
-                <div className="flex items-center gap-3 h-[82px]">
+            <div className="bg-gray-800 rounded-[2rem] max-[580px]:rounded-xl h-fit w-[90%] hover:bg-gray-800/65 transition-all duration-500 p-4 max-[580px]:p-2 flex flex-col gap-4">
+                <div className="flex items-center gap-3 h-[82px] max-[580px]:h-[54px]">
                     <BeatBoxImg 
                         mode={mode}
                         handleResumeClick={handleResumeClick}
@@ -102,8 +106,8 @@ export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode }
 
                     <hr className="bg-gray-700 w-0.5 h-full"/>
 
-                    <div className="flex flex-col justify-between h-[82px]">
-                        <h3 className={cn('text-xl text-white hover:text-link-blue/70 hover:drop-shadow-text-link transition-all duration-500 cursor-pointer' ,bagel_fat_one.className)}>
+                    <div className="flex flex-col justify-between h-[82px] max-[580px]:h-[51px]">
+                        <h3 className={cn('text-xl max-[580px]:text-base max-[580px]:leading-4 text-white hover:text-link-blue/70 hover:drop-shadow-text-link transition-all duration-500 cursor-pointer' ,bagel_fat_one.className)}>
                             {beat.name}
                         </h3>
 
@@ -115,7 +119,7 @@ export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode }
                                         width={34}
                                         height={34}
                                         alt="arrow"
-                                        className={cn("rounded-full border-2 border-gray-50 transition-all duration-300 hidden max-[730px]:block", {
+                                        className={cn("rounded-full border-2 border-gray-50 transition-all duration-300 hidden max-[580px]:w-[17px] max-[580px]:h-[17px] max-[730px]:block", {
                                             ['-rotate-90']: scaleState,
                                             ['rotate-0']: !scaleState,
                                         })}

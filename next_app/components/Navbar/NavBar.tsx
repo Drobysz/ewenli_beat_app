@@ -34,7 +34,7 @@ export const NavBar = () => {
     ];
     const authTabs = [
         { href: '/inventory', label: 'inventory' },
-        { href: '/basket',    label: 'basket' },
+        // { href: '/basket',    label: 'basket' },
     ];
 
     const tabs = sessionData !== undefined ? [...baseTabs, ...authTabs] : baseTabs;

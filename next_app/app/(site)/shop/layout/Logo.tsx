@@ -17,7 +17,7 @@ export const Logo: FC<LogoProps> = ({...props})=> {
             className="flex justify-center items-center border-r-1 border-b-1 border-dashed box-border border-gray-700"
         >
             <h1
-                className={cn('text-4xl text-center text-white', bagel_fat_one.className)}
+                className={cn('text-4xl text-center text-white max-[510px]:text-3xl max-[390px]:text-xl', bagel_fat_one.className)}
             >
                 Boutique
             </h1>

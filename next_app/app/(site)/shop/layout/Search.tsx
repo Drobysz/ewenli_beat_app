@@ -1,12 +1,12 @@
 // Props
-import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 // Components
 import { SearchBar } from "@/components/index";
 
 type SearchProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
-export const Search: FC<SearchProps> = ({...props})=> {
+export const Search = ({...props}: SearchProps)=> {
 
     return (
         <div

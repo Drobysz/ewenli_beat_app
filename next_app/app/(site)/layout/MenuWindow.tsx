@@ -27,7 +27,7 @@ export const MenuWindow: FC<MenuWindowProps> = ()=> {
         { href: '/seller', label: 'About the seller' },
         { href: '/shop', label: 'Shop' },
         { href: '/inventory', label: 'Inventory' },
-        { href: '/basket', label: 'Basket' }
+        // { href: '/basket', label: 'Basket' }
     ];
 
     useEffect(()=> setMenuWindow(false),[isMore1040]);

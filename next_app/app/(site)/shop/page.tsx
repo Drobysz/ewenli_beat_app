@@ -23,10 +23,14 @@ export async function generateMetadata(){
   };
 };
 
-export async function ShopView () {
+export default async function ShopView () {
     const beats:      Beat[]    = await getProducts();
     const beatImages: BeatUrl[] = await getBeatImages();
     const beatFiles:  BeatUrl[] = await getBeatFiles();
+
+    if (beats === undefined || beatImages === undefined || beatFiles === undefined) {
+      return <FullScreenSpin />
+    }
 
     return (
         <Suspense fallback={<FullScreenSpin />}>

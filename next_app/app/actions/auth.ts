@@ -19,7 +19,7 @@ export async function signup (formData: FormData) {
         formData.get("password") as string, 
     );
 
-    if (!("token" in data)) {
+    if (!data || typeof data !== 'object' || !("token" in data)) {
         redirect("/login");
     }
     console.log(data)

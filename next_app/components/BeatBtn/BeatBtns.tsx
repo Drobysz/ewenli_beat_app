@@ -40,17 +40,17 @@ export const BeatBtns: FC<BeatBtnsProps> = ({ beat, className })=> {
                             buy
                         </CustomBtn>
 
-                        <CustomBtn
+                        {/* <CustomBtn
                             size="small"
                             color="gray-ghost"
                             icon="basket"
                             btnType="basket"
                             idx={beat.id}
-                        />
+                        /> */}
                     </>
                     
                 :
-                    <h4 className="text-gray-50 text-xl">Sign Up to buy</h4>
+                    <h4 className="text-gray-50 text-xl max-[580px]:text-base">Sign Up to buy</h4>
             }
             
         </div>
