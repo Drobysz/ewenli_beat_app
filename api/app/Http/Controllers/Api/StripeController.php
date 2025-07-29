@@ -32,7 +32,7 @@ class StripeController extends Controller
             ]],
             'mode' => 'payment',
             'success_url' => env('APP_FRONT_URL') . '/success?product_id='. $beat->id,
-            'cancel_url' => env('APP_FRONT_URL') . '/?canceled=true',
+            'cancel_url' => env('APP_FRONT_URL') . '/canceled',
         ]);
 
         return response()->json([ 'url' => $checkout_session->url ]);
