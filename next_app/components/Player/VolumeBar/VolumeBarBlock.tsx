@@ -1,5 +1,4 @@
 // Props
-import { FC } from 'react';
 import { VolumeBarProps } from './VolumeBar.props';
 
 // Deps
@@ -8,7 +7,7 @@ import cn from 'classnames';
 // Components
 import Image from 'next/image';
 
-export const VolumeBar: FC<VolumeBarProps> = ({isSoundVisible, setSoundVisibility, handleSoundSeek})=> {
+export const VolumeBar = ({isSoundVisible, setSoundVisibility, handleSoundSeek}: VolumeBarProps)=> {
 
     return (
         <div 
@@ -17,6 +16,7 @@ export const VolumeBar: FC<VolumeBarProps> = ({isSoundVisible, setSoundVisibilit
             onMouseLeave={()=> setSoundVisibility(!isSoundVisible)}
         >
             <Image 
+                className='max-[775px]:w-[30px] max-[775px]:h-[30px]'
                 src='/sound.svg'
                 width={45}
                 height={45}

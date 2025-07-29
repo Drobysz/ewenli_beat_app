@@ -111,11 +111,11 @@ export const Player = ()=> {
     };
 
     return (
-        <div className={cn('fixed bottom-0 z-10 w-[100vw] h-15 grid grid-cols-[auto_minmax(320px,_1000px)_auto] bg-gray-500 border-t-1 border-t-gray-700', {
+        <div className={cn('fixed bottom-0 z-10 w-[100vw] h-15 grid grid-cols-[auto_minmax(320px,_1000px)_auto] bg-gray-500 border-t-1 border-t-gray-700 pr-2', {
             ['hidden']: isPlayerVisible === false
         })}>
             <div />
-            <div className=' grid grid-cols-[0.2fr_0.25fr_0.55fr_auto] gap-4 items-center'>
+            <div className=' grid grid-cols-[0.2fr_0.25fr_0.55fr_auto] max-[520px]:grid-cols-[0.2fr_0.25fr_0.75fr_auto] gap-4 items-center'>
                 <PlayerController 
                     handleArrowClick={handleArrowClick}
                     handleResumeClick={handleResumeClick}
@@ -128,7 +128,7 @@ export const Player = ()=> {
                     imgUrl={currentBeat.imgUrl}
                 />
                 
-                <div className='grid grid-cols-[0.8fr_0.2fr]'>
+                <div className='grid grid-cols-[0.8fr_0.2fr] relative max-[520px]:gap-4'>
                     <TimeBar 
                         handleSeek={handleSeek}
                         duration={duration}
@@ -140,11 +140,10 @@ export const Player = ()=> {
                         setSoundVisibility={setSoundVisibility}
                         handleSoundSeek={handleSoundSeek}
                     />
-                    
                 </div>
                 
                 <Image 
-                    className='hover:opacity-60 active:opacity-60 active:scale-96 justify-self-end'
+                    className='hover:opacity-60 active:opacity-60 active:scale-96 justify-self-end max-[775px]:w-[25px] max-[775px]:h-[25px]'
                     onClick={()=> setPlayerVisibility(false)}
                     src='/cross.svg'
                     width={34}
