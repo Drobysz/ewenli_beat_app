@@ -4,7 +4,6 @@
 import Image from "next/image";
 
 // Hooks/Props
-import { useState } from "react";
 import { BeatBoxImgProps } from "./BeatBoxImg.props";
 
 // Deps
@@ -15,14 +14,12 @@ export const BeatBoxImg = ({
     imgUrl, 
     isPlaying, 
     mode, 
+    isHovered,
     handleResumeClick
 }: BeatBoxImgProps)=> {
-    // Hover state of beat covers
-    const [ isHovered, setHover ] = useState(false);
-
     return (
         <div 
-            className="relative h-full w-[82px] rounded-[0.5rem] max-[580px]:w-[54px] max-[580px]:h-[54px]" 
+            className="relative h-full w-[82px] rounded-[0.5rem] max-[580px]:w-[54px] max-[580px]:h-[54px] cursor-pointer" 
             style={{
                 backgroundImage: imgUrl !== undefined 
                             ? `url(${imgUrl})` 
@@ -30,9 +27,6 @@ export const BeatBoxImg = ({
                 backgroundSize: "cover",
                 backgroundPosition: "center",
             }}
-
-            onMouseEnter={()=> setHover(true)}
-            onMouseLeave={()=> setHover(false)}
         >
             {
                 mode === 'shop' && (
