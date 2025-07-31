@@ -27,7 +27,7 @@ export const AccountDataForm = ({
     formType
 }: AccountDataFormProps) => {
     // Session Data
-    const { sessionData, setSessionData } = useContext(SiteContext);
+    const { sessionData, refreshSessionData } = useContext(SiteContext);
     // Current Form content
     const [ formContent, setFormContent ] = useState('');
     // Response 
@@ -58,8 +58,8 @@ export const AccountDataForm = ({
             };
 
             if (sessionData !== undefined) {
-                setSessionData(newSessionData);
                 await updateSession(newSessionData);
+                refreshSessionData();
             }
 
             setMessage(message);
