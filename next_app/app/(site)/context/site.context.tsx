@@ -1,7 +1,7 @@
 'use client';
 
 // Props/Hooks
-import { createContext, ReactNode, useState, Dispatch, SetStateAction, useEffect } from "react";
+import { createContext, ReactNode, useState, Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { Categories } from "@/interfaces/Products.interface";
 import { UserSession } from "@/interfaces/UserData.interface";
 
@@ -10,6 +10,10 @@ import { getSessionData } from "@/app/actions/sesssions";
 
 // Auth
 import { logoutServer } from "@/app/actions/auth";
+
+// SWR
+
+import useSWR, { mutate } from "swr";
 
 interface CurrentBeat {
     name:      string;
@@ -29,9 +33,9 @@ interface SiteContextInterface {
     isMenuWindowOpen:  boolean;
     sessionData?:      UserSession;
 
-    setModalWindow: Dispatch<SetStateAction<boolean>>;
-    setMenuWindow:  Dispatch<SetStateAction<boolean>>;
-    setSessionData: Dispatch<SetStateAction<UserSession | undefined>>;
+    setModalWindow:     Dispatch<SetStateAction<boolean>>;
+    setMenuWindow:      Dispatch<SetStateAction<boolean>>;
+    refreshSessionData: ()=> void;
 
     // Player and beats related states
     currentBeat:     CurrentBeat;
@@ -47,9 +51,9 @@ export const SiteContext = createContext<SiteContextInterface>({
     isModalWindowOpen: false,
     isMenuWindowOpen:  false,
     
-    setModalWindow: () => {},
-    setMenuWindow:  () => {},
-    setSessionData: () => {},
+    setModalWindow:     () => {},
+    setMenuWindow:      () => {},
+    refreshSessionData: () => {},
 
     // Player and beats related states
     currentBeat:     { name: '', imgUrl: '', category: Categories.Digicore, beatUrl: '', isPlaying: false},
@@ -62,8 +66,7 @@ export const SiteContext = createContext<SiteContextInterface>({
 });
 
 export const SiteContextProvider = ({ 
-    children,
-    initialSession 
+    children
 }: { 
     children:       ReactNode,
     initialSession: UserSession | undefined
@@ -73,7 +76,12 @@ export const SiteContextProvider = ({
     // Menu window state
     const [ isMenuWindowOpen, setMenuWindow ] = useState(false);
     // User Session Data
-    const [ sessionData, setSessionData ] = useState<UserSession | undefined>(initialSession);
+    const {data: sessionData} = useSWR<UserSession | undefined>(
+        'session',
+        getSessionData,
+        { refreshInterval: 60_000 }
+    );
+    const prevSessionData = useRef<UserSession | undefined>(undefined);
 
     // Player and beats related states
 
@@ -89,24 +97,14 @@ export const SiteContextProvider = ({
     const [ isPlayerVisible, setPlayerVisibility ] = useState(false);
     // Beat ID state
     const [ beatId, setBeatId ] = useState<BeatIdController>({ id: -1, qntty: 0 });
+
+    const refreshSessionData = ()=> mutate('session');
     
-    useEffect(()=>{
-        const id = setInterval(()=>{
-            async function fetchSessionData () {
-                const fetchedSessionData = await getSessionData();
-
-                if (fetchedSessionData === undefined && sessionData !== undefined){
-                    logoutServer(sessionData.token!)
-                }
-
-                setSessionData(fetchedSessionData);
-            }
-
-            fetchSessionData();
-        }, 1000 * 60);
-
-        return ()=> clearInterval(id);
-    }, []);
+    useEffect(()=> {
+        if (sessionData === undefined && prevSessionData.current !== undefined) {
+            logoutServer(prevSessionData.current.token!);
+        }
+    }, [sessionData]);
 
     return (
         <SiteContext.Provider value={{
@@ -119,7 +117,7 @@ export const SiteContextProvider = ({
 
             setModalWindow,
             setMenuWindow,
-            setSessionData,
+            refreshSessionData,
             setCurrentBeat,
             setPlayerVisibility,
             setBeatId
