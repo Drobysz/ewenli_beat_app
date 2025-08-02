@@ -33,6 +33,8 @@ export const BeatBox = ({
         isPlayerVisible, 
         setCurrentBeat, 
         setPlayerVisibility, 
+        setLicenseWindow,
+        setCurentBeatInLicense
     } = useContext(SiteContext);
 
     const changeBeat = ()=> {
@@ -60,6 +62,14 @@ export const BeatBox = ({
         };
     };
 
+    const setNewLicenseBeat = () => {
+        setLicenseWindow(true);
+        setCurentBeatInLicense({
+            name:     beat.name,
+            category: beat.categories
+        })
+    };
+
     return (
         <li className={cn("justify-between items-center",{
             ['flex']:   displayState,
@@ -72,6 +82,7 @@ export const BeatBox = ({
                 className="bg-gray-800 rounded-[2rem] max-[580px]:rounded-xl h-fit w-[90%] hover:bg-gray-800/65 transition-all duration-500 p-4 max-[580px]:p-2 flex flex-col gap-4"
                 onMouseEnter={()=> setHover(true)}
                 onMouseLeave={()=> setHover(false)}
+                onClick={()=> mode === "inventory" && setNewLicenseBeat()}
             >
                 <div className="flex items-center gap-3 h-[82px] max-[580px]:h-[54px]">
                     <BeatBoxImg 
