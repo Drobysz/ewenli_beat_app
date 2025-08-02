@@ -12,19 +12,14 @@ import { Footer } from "./layout/Footer";
 // Context Provider
 import { SiteContextProvider } from "./context/site.context";
 
-// Session
-import { UserSession } from '@/interfaces/UserData.interface';
-import { getSessionData } from '@/app/actions/sesssions';
-
 export default async function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const sessionData: UserSession | undefined = await getSessionData();  
 
   return (
-    <SiteContextProvider initialSession={sessionData}>
+    <SiteContextProvider>
       <ModalAccountSettingsWindow />
       <MenuWindow />
       <Player />
