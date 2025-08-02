@@ -1,7 +1,7 @@
 'use client'
 
 // Props
-import { DetailedHTMLProps, FC, HTMLAttributes } from "react";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 import { Beat } from "@/interfaces/Products.interface";
 import { BeatUrl } from "@/interfaces/s3ElementData.interface";
 
@@ -10,7 +10,6 @@ import { useState, useContext, useEffect, useMemo } from "react";
 
 // Context
 import { ShopContext } from "../context/shop.context";
-import { SiteContext } from "../../context/site.context";
 
 // Component
 import { BeatBox } from "@/components/index";
@@ -22,10 +21,9 @@ interface ProductsListPageProps extends DetailedHTMLProps<HTMLAttributes<HTMLDiv
     beatFiles:  BeatUrl[];
 }
 
-export const ProductsListPage: FC<ProductsListPageProps> = ({ beats, beatImages, beatFiles, ...props })=> {
+export const ProductsListPage = ({ beats, beatImages, beatFiles, ...props }: ProductsListPageProps)=> {
     // Searchbar and current category list values
     const { searchBarRequest, filteredCategoryList } = useContext(ShopContext);
-    const { beatId, setBeatId } = useContext(SiteContext);
     // Price Up/Down
     const [ priceState, setPriceState ] = useState(false);
     // Filtered Beats
@@ -50,13 +48,6 @@ export const ProductsListPage: FC<ProductsListPageProps> = ({ beats, beatImages,
     }, [searchBarRequest, filteredCategoryList, priceState, beats]);
 
     useEffect(() => setFilteredBeats(filteredBeatsMemo), [filteredBeatsMemo]);
-
-    useEffect(()=> {
-        setBeatId({
-            ...beatId,
-            qntty: beats.length
-        })
-    }, []);
 
     return (
         <div
