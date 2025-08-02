@@ -12,7 +12,6 @@ import { getSessionData } from "@/app/actions/sesssions";
 import { logoutServer } from "@/app/actions/auth";
 
 // SWR
-
 import useSWR, { mutate } from "swr";
 
 interface CurrentBeat {
@@ -23,14 +22,24 @@ interface CurrentBeat {
     isPlaying: boolean;
 };
 
-interface SiteContextInterface {
-    isModalWindowOpen: boolean;
-    isMenuWindowOpen:  boolean;
-    sessionData?:      UserSession;
+interface CurentBeatInLicenseProps {
+    name:     string, 
+    category: string
+};
 
-    setModalWindow:     Dispatch<SetStateAction<boolean>>;
-    setMenuWindow:      Dispatch<SetStateAction<boolean>>;
-    refreshSessionData: ()=> void;
+// initialSession
+interface SiteContextInterface {
+    isModalWindowOpen:   boolean;
+    isMenuWindowOpen:    boolean;
+    sessionData?:        UserSession;
+    isLicenseWindowOpen: boolean;
+    curentBeatInLicense: CurentBeatInLicenseProps;
+
+    setModalWindow:           Dispatch<SetStateAction<boolean>>;
+    setMenuWindow:            Dispatch<SetStateAction<boolean>>;
+    setLicenseWindow:         Dispatch<SetStateAction<boolean>>;
+    setCurentBeatInLicense:   Dispatch<SetStateAction<CurentBeatInLicenseProps>>;
+    refreshSessionData:       ()=> void;
 
     // Player and beats related states
     currentBeat:     CurrentBeat;
@@ -41,19 +50,25 @@ interface SiteContextInterface {
 }
 
 export const SiteContext = createContext<SiteContextInterface>({
-    isModalWindowOpen: false,
-    isMenuWindowOpen:  false,
+    isModalWindowOpen:   false,
+    isMenuWindowOpen:    false,
+    isLicenseWindowOpen: false,
+    curentBeatInLicense: {name: "", category: ""},
     
-    setModalWindow:     () => {},
-    setMenuWindow:      () => {},
-    refreshSessionData: () => {},
+    setModalWindow:         () => {},
+    setMenuWindow:          () => {},
+    setLicenseWindow:       () => {},
+    refreshSessionData:     () => {},
+    setCurentBeatInLicense: () => {},
 
     // Player and beats related states
-    currentBeat:     { name: '', 
-                       imgUrl: '', 
-                       category: Categories.Digicore, 
-                       beatUrl: '', 
-                       isPlaying: false},
+    currentBeat:    { 
+                        name: '', 
+                        imgUrl: '', 
+                        category: Categories.Digicore, 
+                        beatUrl: '', 
+                        isPlaying: false
+                    },
     isPlayerVisible: false,
 
     setCurrentBeat:      () => {},
@@ -64,10 +79,11 @@ export const SiteContextProvider = ({
     children
 }: { 
     children:       ReactNode,
-    initialSession: UserSession | undefined
  }) => {
     const [ isModalWindowOpen, setModalWindow ] = useState(false);
     const [ isMenuWindowOpen, setMenuWindow ] = useState(false);
+    const [ isLicenseWindowOpen, setLicenseWindow ] = useState(false);
+    const [ curentBeatInLicense, setCurentBeatInLicense ] = useState<CurentBeatInLicenseProps>({name: "", category: ""});
     const {data: sessionData} = useSWR<UserSession | undefined>(
         'session',
         getSessionData,
@@ -78,7 +94,6 @@ export const SiteContextProvider = ({
     const refreshSessionData = ()=> mutate('session');
 
     // Player and beats related states
-
     const [ currentBeat, setCurrentBeat ] = useState<CurrentBeat>({ 
         name:      '', 
         category:  Categories.Digicore, 
@@ -100,16 +115,20 @@ export const SiteContextProvider = ({
 
     return (
         <SiteContext.Provider value={{
-            isModalWindowOpen: isModalWindowOpen,
-            isMenuWindowOpen:  isMenuWindowOpen,
-            sessionData:       sessionData,
-            currentBeat:       currentBeat,
-            isPlayerVisible:   isPlayerVisible,
+            isModalWindowOpen:    isModalWindowOpen,
+            isMenuWindowOpen:     isMenuWindowOpen,
+            isLicenseWindowOpen:  isLicenseWindowOpen,
+            sessionData:          sessionData,
+            currentBeat:          currentBeat,
+            curentBeatInLicense:  curentBeatInLicense,
+            isPlayerVisible:      isPlayerVisible,
 
             setModalWindow,
             setMenuWindow,
+            setLicenseWindow,
             refreshSessionData,
             setCurrentBeat,
+            setCurentBeatInLicense,
             setPlayerVisibility,
         }}>
             {children}
