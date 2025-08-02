@@ -22,7 +22,6 @@ export async function signup (formData: FormData) {
     if (!data || typeof data !== 'object' || !("token" in data)) {
         redirect("/login");
     }
-    console.log(data)
 
     await createSession(
         data.token, 
@@ -87,5 +86,7 @@ export async function logout (token: string) {
     if (res.status === 200) {
         await deleteSession();
         redirect('/login');
+    } else {
+        console.log('unsuccessful logout');
     }
 }
