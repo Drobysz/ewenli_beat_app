@@ -3,6 +3,7 @@ import { getPurchasedProducts } from "@/helpers/productsRequest";
 
 // Components
 import { BeatBox, FullScreenSpin, GrayFeed } from "@/components/index";
+import { LicenseWindow } from "./page_components/LicenseWindow";
 
 // Props
 import { Beat } from "@/interfaces/Products.interface";
@@ -48,13 +49,13 @@ export default async function InventoryPage () {
     return (
         <div className="h-[100vh] overflow-y-scroll">
             <GrayFeed>
-                <h1 className={cn('flex justify-center items-center text-white text-5xl h-[104px]', climate_crisis.className)}>
+                <h1 className={cn('flex justify-center items-center text-white text-5xl max-[390px]:text-3xl h-[104px] max-[390px]:h-[62px]', climate_crisis.className)}>
                     Inventory
                 </h1>
             </GrayFeed>
 
             <ul 
-                className="overflow-x-hidden mb-6 grid grid-cols-[repeat(auto-fit,minmax(200px,400px))] justify-center content-start gap-x-6 gap-y-6 pt-10"
+                className="overflow-x-hidden mb-6 grid grid-cols-[repeat(auto-fit,minmax(200px,400px))] justify-center content-start gap-x-6 gap-y-6 pt-10 max-[390px]:px-4"
             >
                 {
                     purchasedBeats!.length > 0 
@@ -74,6 +75,8 @@ export default async function InventoryPage () {
                         </h2>
                 }
             </ul>
+
+            <LicenseWindow />
         </div>
     );
 };
