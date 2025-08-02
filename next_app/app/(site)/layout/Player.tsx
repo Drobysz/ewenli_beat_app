@@ -20,26 +20,28 @@ export const Player = ()=> {
     // Audio Control Ref
     const audioRef = useRef<HTMLAudioElement>(null!);
     // Context States
-    const { beatId, isPlayerVisible, currentBeat, setBeatId, setPlayerVisibility, setCurrentBeat } = useContext(SiteContext);
+    const { 
+        isPlayerVisible, 
+        currentBeat, 
+        setPlayerVisibility, 
+        setCurrentBeat 
+    } = useContext(SiteContext);
     // Audio Tag States
     const [ duration, setDuration ] = useState(0);
     const [ currentTime, setCurrentTime ] = useState(0);
 
-    // Volume states
-    const [ isSoundVisible, setSoundVisibility ] = useState(false);
-
     // Setting up of a new track
     useEffect(()=> {
-        audioRef.current.src = currentBeat.beatUrl;
-
         const handleLoadedMetadata = () => {
             setDuration(audioRef.current!.duration);
         };
 
-        audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
-        if (currentBeat.name !== '')
-            audioRef.current.play()
-    },[currentBeat.name, currentBeat.beatUrl]);
+        if (currentBeat.name !== '') {
+            audioRef.current.src = currentBeat.beatUrl;
+            audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
+            audioRef.current.play();
+        }
+    },[currentBeat.name]);
 
     // Player Visibility
     useEffect(()=> {
@@ -89,27 +91,6 @@ export const Player = ()=> {
         audioRef.current.volume = Number(e.target.value);
     };
 
-    // Change ID
-    const changeId = (n: number)=> {
-        setBeatId({
-            ...beatId,
-            id: n
-        });
-    };
-
-    const handleArrowClick = (direction: '+' | '-')=> {
-        switch (direction) {
-            case '+':
-                if (beatId.id + 1 !== beatId.qntty){
-                    changeId(++beatId.id)
-                    ++beatId.id
-                }
-            case '-':
-                if (beatId.id - 1 !== -1)
-                    changeId(--beatId.id)
-        }
-    };
-
     return (
         <div className={cn('fixed bottom-0 z-10 w-[100vw] h-15 grid grid-cols-[auto_minmax(320px,_1000px)_auto] bg-gray-500 border-t-1 border-t-gray-700 pr-2', {
             ['hidden']: isPlayerVisible === false
@@ -117,7 +98,6 @@ export const Player = ()=> {
             <div />
             <div className=' grid grid-cols-[0.2fr_0.25fr_0.55fr_auto] max-[520px]:grid-cols-[0.2fr_0.25fr_0.75fr_auto] gap-4 items-center'>
                 <PlayerController 
-                    handleArrowClick={handleArrowClick}
                     handleResumeClick={handleResumeClick}
                     isPlaying={currentBeat.isPlaying}
                 />
@@ -135,15 +115,11 @@ export const Player = ()=> {
                         currentTime={currentTime}
                     />
 
-                    <VolumeBar 
-                        isSoundVisible={isSoundVisible}
-                        setSoundVisibility={setSoundVisibility}
-                        handleSoundSeek={handleSoundSeek}
-                    />
+                    <VolumeBar handleSoundSeek={handleSoundSeek}/>
                 </div>
                 
                 <Image 
-                    className='hover:opacity-60 active:opacity-60 active:scale-96 justify-self-end max-[775px]:w-[25px] max-[775px]:h-[25px]'
+                    className='cursor-pointer hover:opacity-60 active:opacity-60 active:scale-96 justify-self-end max-[775px]:w-[25px] max-[775px]:h-[25px]'
                     onClick={()=> setPlayerVisibility(false)}
                     src='/cross.svg'
                     width={34}

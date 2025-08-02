@@ -1,7 +1,7 @@
 'use client'
 
 // Props/Hooks
-import { useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import BeatBoxProps from "./BeatBox.interface";
 
 // Font 
@@ -26,24 +26,14 @@ export const BeatBox = ({
 }: BeatBoxProps)=> {
     const [ scaleState, setScaleState ]     = useState(false);
     const [ displayState, setDisplayState ] = useState(true);
-    const [ isPlaying, setPlay ]            = useState(false);
     const [ isHovered, setHover ]           = useState(false);
 
     const { 
         currentBeat,
         isPlayerVisible, 
-        beatId, 
         setCurrentBeat, 
         setPlayerVisibility, 
-        setBeatId 
     } = useContext(SiteContext);
-
-    const changeId = ()=> {
-        setBeatId({
-            ...beatId,
-            id: idx
-        });
-    };
 
     const changeBeat = ()=> {
         setCurrentBeat({
@@ -56,18 +46,13 @@ export const BeatBox = ({
     };
 
     const handleResumeClick = ()=> {
-        setPlay(!isPlaying)
+        if (isPlayerVisible === false) {
+            setPlayerVisibility(true);
+        }
 
         if (currentBeat.name !== beat.name){
-            if (currentBeat.name === '')
-                setPlayerVisibility(true);
-
-            changeId();
             changeBeat();
         } else {
-            if (isPlayerVisible === false)
-                setPlayerVisibility(true);
-
             setCurrentBeat({
                 ...currentBeat,
                 isPlaying: !currentBeat.isPlaying
@@ -75,26 +60,9 @@ export const BeatBox = ({
         };
     };
 
-    useEffect(()=> {
-        if (isPlaying && currentBeat.name !== beat.name)
-            setPlay(false);
-    }, [currentBeat.name]);
-
-    useEffect(()=> {
-        if (currentBeat.name === beat.name)
-            setPlay(currentBeat.isPlaying)
-    }, [currentBeat.isPlaying]);
-
-    useEffect(()=> {
-        if (idx === beatId.id && currentBeat.name !== beat.name){
-            changeBeat();
-            setPlay(true);
-        }
-    }, [beatId.id]);
-
     return (
         <li className={cn("justify-between items-center",{
-            ['flex']: displayState,
+            ['flex']:   displayState,
             ['hidden']: displayState === false
         })}>
             <span className={cn('text-3xl text-white max-[580px]:text-xl', impact.className)}>
@@ -109,7 +77,7 @@ export const BeatBox = ({
                     <BeatBoxImg 
                         mode={mode}
                         handleResumeClick={handleResumeClick}
-                        isPlaying={isPlaying}
+                        isPlaying={currentBeat.name === beat.name ? currentBeat.isPlaying : false}
                         isHovered={isHovered}
                         imgUrl={beatImg.url}
                     />

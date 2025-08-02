@@ -23,11 +23,6 @@ interface CurrentBeat {
     isPlaying: boolean;
 };
 
-interface BeatIdController {
-    id:    number;
-    qntty: number;
-}
-
 interface SiteContextInterface {
     isModalWindowOpen: boolean;
     isMenuWindowOpen:  boolean;
@@ -40,11 +35,9 @@ interface SiteContextInterface {
     // Player and beats related states
     currentBeat:     CurrentBeat;
     isPlayerVisible: boolean;
-    beatId:          BeatIdController;
 
     setCurrentBeat:      Dispatch<SetStateAction<CurrentBeat>>;
     setPlayerVisibility: Dispatch<SetStateAction<boolean>>;
-    setBeatId:           Dispatch<SetStateAction<BeatIdController>>;
 }
 
 export const SiteContext = createContext<SiteContextInterface>({
@@ -56,13 +49,15 @@ export const SiteContext = createContext<SiteContextInterface>({
     refreshSessionData: () => {},
 
     // Player and beats related states
-    currentBeat:     { name: '', imgUrl: '', category: Categories.Digicore, beatUrl: '', isPlaying: false},
+    currentBeat:     { name: '', 
+                       imgUrl: '', 
+                       category: Categories.Digicore, 
+                       beatUrl: '', 
+                       isPlaying: false},
     isPlayerVisible: false,
-    beatId:          { id: -1, qntty: 0 },
 
     setCurrentBeat:      () => {},
     setPlayerVisibility: () => {},
-    setBeatId:           () => {},
 });
 
 export const SiteContextProvider = ({ 
@@ -71,11 +66,8 @@ export const SiteContextProvider = ({
     children:       ReactNode,
     initialSession: UserSession | undefined
  }) => {
-    // State of modal window with user settings
     const [ isModalWindowOpen, setModalWindow ] = useState(false);
-    // Menu window state
     const [ isMenuWindowOpen, setMenuWindow ] = useState(false);
-    // User Session Data
     const {data: sessionData} = useSWR<UserSession | undefined>(
         'session',
         getSessionData,
@@ -83,9 +75,10 @@ export const SiteContextProvider = ({
     );
     const prevSessionData = useRef<UserSession | undefined>(undefined);
 
+    const refreshSessionData = ()=> mutate('session');
+
     // Player and beats related states
 
-    // Beat chose at the current moment
     const [ currentBeat, setCurrentBeat ] = useState<CurrentBeat>({ 
         name:      '', 
         category:  Categories.Digicore, 
@@ -93,17 +86,16 @@ export const SiteContextProvider = ({
         beatUrl:   '', 
         isPlaying: false
     });
-    // Player visibility state
     const [ isPlayerVisible, setPlayerVisibility ] = useState(false);
-    // Beat ID state
-    const [ beatId, setBeatId ] = useState<BeatIdController>({ id: -1, qntty: 0 });
-
-    const refreshSessionData = ()=> mutate('session');
     
     useEffect(()=> {
         if (sessionData === undefined && prevSessionData.current !== undefined) {
             logoutServer(prevSessionData.current.token!);
+        } else {
+            console.log('unsuccessful logout in context');
         }
+
+        prevSessionData.current = sessionData
     }, [sessionData]);
 
     return (
@@ -113,14 +105,12 @@ export const SiteContextProvider = ({
             sessionData:       sessionData,
             currentBeat:       currentBeat,
             isPlayerVisible:   isPlayerVisible,
-            beatId:            beatId,
 
             setModalWindow,
             setMenuWindow,
             refreshSessionData,
             setCurrentBeat,
             setPlayerVisibility,
-            setBeatId
         }}>
             {children}
         </SiteContext.Provider>
