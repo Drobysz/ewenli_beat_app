@@ -29,25 +29,26 @@ export const BeatBoxImg = ({
             }}
         >
             {
-                mode === 'shop' && (
-                    <div 
-                        className={cn("bg-black/60 h-full w-full flex justify-center items-center transition-all duration-500",{
-                            ['hidden']: isHovered === false,
-                            ['absolute']: isHovered
-                        })}
-                    >
-                        <Image 
-                            src={isPlaying ? '/stop.svg' : '/resume.svg'}
-                            width={50}
-                            height={50}
-                            alt="play"
-                            onClick={handleResumeClick}
-                        />
-                    </div>
-                )
+                <div 
+                    className={cn("h-full w-full flex justify-center items-center transition-all duration-500",{
+                        ['hidden']: isHovered === false,
+                        ['absolute bg-black/40']: isHovered,
+                        ['bg-black/60']: mode === 'shop'
+                    })}
+                >
+                    {
+                        mode === 'shop' && (
+                            <Image 
+                                src={isPlaying ? '/stop.svg' : '/resume.svg'}
+                                width={50}
+                                height={50}
+                                alt="play"
+                                onClick={handleResumeClick}
+                            />
+                        )
+                    }
+                </div>
             }
-            
         </div>
-        
     );
 };
