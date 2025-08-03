@@ -35,10 +35,10 @@ Route::patch('/change-nickname', [UserController::class, 'changeNickname']);
 
 // Store, Destroy and Index routes for Inventory and Basket
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('inventory', InventoryController::class)->only(['store', 'index']);
+    Route::get ('inventory',       [InventoryController::class, 'index']);
+    Route::post('inventory/{id}',  [InventoryController::class, 'store']);
     Route::apiResource('basket',    BasketController::class)   ->only(['index', 'store', 'destroy']);
 });
-
 
 // S3 storage routes
 Route::prefix('lib')->group( function() {
@@ -48,6 +48,7 @@ Route::prefix('lib')->group( function() {
 
 // Stripe session route
 Route::post('/create-checkout-session', [StripeController::class, 'createCheckoutSession']);
+Route::post('/validate-purchase',       [StripeController::class, 'validatePurchase']);
 
 // Fallback for undefined routes
 Route::fallback(function () {
