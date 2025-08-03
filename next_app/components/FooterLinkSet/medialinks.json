@@ -6,19 +6,19 @@
         "links": [
             {
                 "mediaName": "telegram",
-                "link": "#"
+                "link": "https://t.me/gogonga"
             },
             {
                 "mediaName": "linkedin",
-                "link": "#"
+                "link": "https://www.linkedin.com/in/alexander-drobyshevski-9656b2330/?trk=opento_sprofile_topcard"
             },
             {
                 "mediaName": "github",
-                "link": "#"
+                "link": "https://github.com/Drobysz"
             },
             {
                 "mediaName": "developer",
-                "link": "#"
+                "link": "https://drobysz.vercel.app/projects"
             }
         ]
     },
@@ -30,7 +30,7 @@
         "links": [
             {
                 "mediaName": "telegram",
-                "link": "#"
+                "link": "https://t.me/ewenli"
             },
             {
                 "mediaName": "vk",
@@ -38,14 +38,14 @@
             },
             {
                 "mediaName": "instagram",
-                "link": "#"
+                "link": "https://www.instagram.com/ewenli.live/"
             },
             {
                 "mediaName": "steam",
-                "link": "#"
+                "link": "https://steamcommunity.com/id/ewenli"
             },
             {
-                "mediaName": "what'sup",
+                "mediaName": "whats'up",
                 "link": "#"
             }
         ]
