@@ -30,7 +30,6 @@ export const LicenseWindow = ()=> {
                     alt="title_logo"
                     width={144}
                     height={144}
-                    onClick={()=> setLicenseWindow(false)}
                 />
 
                 <div className="flex flex-col gap-4 max-[500px]:gap-2 text-white">
