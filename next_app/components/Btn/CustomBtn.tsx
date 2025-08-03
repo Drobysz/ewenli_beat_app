@@ -74,7 +74,7 @@ export const CustomBtn: FC<BtnProps> = ({
 
                 break
             case 'buy':
-                const stripeUrl = await createStripeSession(stripe_price_id!)
+                const stripeUrl = await createStripeSession(stripe_price_id!, sessionData!.email!);
                 redirect(stripeUrl);
 
                 break;
