@@ -90,7 +90,7 @@ export const BeatBox = ({
                         handleResumeClick={handleResumeClick}
                         isPlaying={currentBeat.name === beat.name ? currentBeat.isPlaying : false}
                         isHovered={isHovered}
-                        imgUrl={beatImg.url}
+                        imgUrl={beatImg !== undefined ? beatImg.url : '/swrc.png'}
                     />
 
                     <hr className="bg-gray-700 w-0.5 h-full"/>
