@@ -29,7 +29,7 @@ export default function Home() {
 
         {/* Title */}
         <h1 className={ cn(bagel_fat_one.className, 'flex flex-col items-center text-5xl text-transparent bg-gradient-to-br from-gold to-pinkish bg-clip-text leading-18 max-[690px]:text-3xl max-[690px]:leading-12 max-[550px]:leading-10 max-[425px]:text-2xl max-[425px]:leading-8') }>
-          <span>SHOP of ELECTRONIC MUSiC</span> 
+          <span>SHOP of Licences for Beats</span> 
           <span>Samples</span>
         </h1>
 
