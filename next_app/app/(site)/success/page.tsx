@@ -9,6 +9,7 @@ import { Suspense } from "react";
 
 // Fetch function
 import { setProduct } from "@/helpers/productsRequest";
+import { validatePurchase } from "@/helpers/stripeRequest";
 import { getSessionData } from "@/app/actions/sesssions";
 
 // Props
@@ -18,20 +19,25 @@ import { UserSession } from "@/interfaces/UserData.interface";
 export default async function PaymentCheckingPage ({
     searchParams
 }: {
-    searchParams: Promise<{ product_id: string }>
+    searchParams: Promise<{ session_id: string, price_id: string }>
 }) {
 
     const sessionData: UserSession | undefined = await getSessionData(); 
-    const { product_id } = await searchParams;
+    const { session_id, price_id } = await searchParams;
 
-    if ( sessionData === undefined || !sessionData?.token || !product_id ) {
+    if ( sessionData === undefined || !sessionData?.token || !price_id ) {
         return null;
     }
 
     const token = sessionData.token!
+    const isValid = await validatePurchase(session_id);
 
-    setProduct(token, Number(product_id));
-    redirect('/inventory');
+    if (isValid) {
+        await setProduct(token, Number(price_id));
+        redirect('/inventory');
+    } else {
+        redirect('/cancel');
+    }
 
     return (
         <Suspense fallback={<FullScreenSpin />} />
