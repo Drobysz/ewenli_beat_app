@@ -1,7 +1,7 @@
 'use client'
 
 // Props/Hooks
-import { FC, useEffect, useState, useContext } from "react";
+import { useState, useContext } from "react";
 import BeatBoxProps from "./BeatBox.interface";
 
 // Font 
@@ -17,22 +17,25 @@ import { SiteContext } from "@/app/(site)/context/site.context";
 // Dep
 import cn from 'classnames';
 
-export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode })=> {
-    // Scale state
-    const [ scaleState, setScaleState ] = useState(false);
-    // Display state
+export const BeatBox = ({ 
+    beat, 
+    beatImg, 
+    beatFile, 
+    idx, 
+    mode 
+}: BeatBoxProps)=> {
+    const [ scaleState, setScaleState ]     = useState(false);
     const [ displayState, setDisplayState ] = useState(true);
-    // Play state
-    const [ isPlaying, setPlay ] = useState(false);
-    // Current beat
-    const { currentBeat, isPlayerVisible, beatId, setCurrentBeat, setPlayerVisibility, setBeatId } = useContext(SiteContext);
+    const [ isHovered, setHover ]           = useState(false);
 
-    const changeId = ()=> {
-        setBeatId({
-            ...beatId,
-            id: idx
-        });
-    };
+    const { 
+        currentBeat,
+        isPlayerVisible, 
+        setCurrentBeat, 
+        setPlayerVisibility, 
+        setLicenseWindow,
+        setCurentBeatInLicense
+    } = useContext(SiteContext);
 
     const changeBeat = ()=> {
         setCurrentBeat({
@@ -45,18 +48,13 @@ export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode }
     };
 
     const handleResumeClick = ()=> {
-        setPlay(!isPlaying)
+        if (isPlayerVisible === false) {
+            setPlayerVisibility(true);
+        }
 
         if (currentBeat.name !== beat.name){
-            if (currentBeat.name === '')
-                setPlayerVisibility(true);
-
-            changeId();
             changeBeat();
         } else {
-            if (isPlayerVisible === false)
-                setPlayerVisibility(true);
-
             setCurrentBeat({
                 ...currentBeat,
                 isPlaying: !currentBeat.isPlaying
@@ -64,46 +62,47 @@ export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode }
         };
     };
 
-    useEffect(()=> {
-        if (isPlaying && currentBeat.name !== beat.name)
-            setPlay(false);
-    }, [currentBeat.name]);
-
-    useEffect(()=> {
-        if (currentBeat.name === beat.name)
-            setPlay(currentBeat.isPlaying)
-    }, [currentBeat.isPlaying]);
-
-    useEffect(()=> {
-        if (idx === beatId.id && currentBeat.name !== beat.name){
-            changeBeat();
-            setPlay(true);
-        }
-    }, [beatId.id]);
+    const setNewLicenseBeat = () => {
+        setLicenseWindow(true);
+        setCurentBeatInLicense({
+            name:     beat.name,
+            category: beat.categories
+        })
+    };
 
     return (
         <li className={cn("justify-between items-center",{
-            ['flex']: displayState,
+            ['flex']:   displayState,
             ['hidden']: displayState === false
         })}>
-            <span 
-                className={cn('text-3xl text-white', impact.className)}
-            >
+            <span className={cn('text-3xl text-white max-[580px]:text-xl', impact.className)}>
                 {idx+1}
             </span>
-            <div className="bg-gray-800 rounded-[2rem] h-fit w-[90%] hover:bg-gray-800/65 transition-all duration-500 p-4 flex flex-col gap-4">
-                <div className="flex items-center gap-3 h-[82px]">
+            <div 
+                className="bg-gray-800 rounded-[2rem] max-[580px]:rounded-xl h-fit w-[90%] hover:bg-gray-800/65 transition-all duration-500 p-4 max-[580px]:p-2 flex flex-col gap-4"
+                onMouseEnter={()=> setHover(true)}
+                onMouseLeave={()=> setHover(false)}
+                onClick={()=> mode === "inventory" && setNewLicenseBeat()}
+            >
+                <div className="flex items-center gap-3 h-[82px] max-[580px]:h-[54px]">
                     <BeatBoxImg 
                         mode={mode}
                         handleResumeClick={handleResumeClick}
-                        isPlaying={isPlaying}
-                        imgUrl={beatImg.url}
+                        isPlaying={currentBeat.name === beat.name ? currentBeat.isPlaying : false}
+                        isHovered={isHovered}
+                        imgUrl={beatImg !== undefined ? beatImg.url : '/swrc.png'}
                     />
 
                     <hr className="bg-gray-700 w-0.5 h-full"/>
 
-                    <div className="flex flex-col justify-between h-[82px]">
-                        <h3 className={cn('text-xl text-white hover:text-link-blue/70 hover:drop-shadow-text-link transition-all duration-500 cursor-pointer' ,bagel_fat_one.className)}>
+                    <div className="flex flex-col justify-between h-[82px] max-[580px]:h-[51px]">
+                        <h3 className={cn(
+                            'text-xl max-[580px]:text-base max-[580px]:leading-4 transition-all duration-500', 
+                            bagel_fat_one.className, 
+                            {
+                                ['drop-shadow-text-link text-link-blue/70']: isHovered,
+                                ['text-white']: !isHovered
+                            })}>
                             {beat.name}
                         </h3>
 
@@ -115,7 +114,7 @@ export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode }
                                         width={34}
                                         height={34}
                                         alt="arrow"
-                                        className={cn("rounded-full border-2 border-gray-50 transition-all duration-300 hidden max-[730px]:block", {
+                                        className={cn("rounded-full border-2 border-gray-50 transition-all duration-300 hidden max-[580px]:w-[17px] max-[580px]:h-[17px] max-[730px]:block", {
                                             ['-rotate-90']: scaleState,
                                             ['rotate-0']: !scaleState,
                                         })}
@@ -134,6 +133,7 @@ export const BeatBox: FC<BeatBoxProps> = ({ beat, beatImg, beatFile, idx, mode }
                             mode === 'basket' && (
                                 <CustomBtn 
                                     color="red-ghost"
+                                    className="w-fit h-fit"
                                     size="medium"
                                     idx={beat.id}
                                     btnType="delete"

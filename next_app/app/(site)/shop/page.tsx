@@ -1,9 +1,20 @@
-// View
-import { ShopView } from './ShopView';
+// Page
+import { ProductsListPage } from "./layout/ProductsListPage";
+
+// Props
+import { Beat } from "@/interfaces/Products.interface";
+import { BeatUrl } from "@/interfaces/s3ElementData.interface";
+
+// Skeleton component
+import { FullScreenSpin } from "@/components/index";
+import { Suspense } from "react";
+
+// Helpers
+import { getProducts } from "@/helpers/productsRequest";
+import { getBeatImages, getBeatFiles } from "@/helpers/s3LibRequests";
 
 // Meta data
 import metaData from '@/metadata/metadata.json';
-
 
 export async function generateMetadata(){
   return {
@@ -12,8 +23,18 @@ export async function generateMetadata(){
   };
 };
 
-export default function Page () {
-  return (
-    <ShopView />
-  );
+export default async function ShopView () {
+    const beats:      Beat[]    = await getProducts();
+    const beatImages: BeatUrl[] = await getBeatImages();
+    const beatFiles:  BeatUrl[] = await getBeatFiles();
+
+    if (beats === undefined || beatImages === undefined || beatFiles === undefined) {
+      return <FullScreenSpin />
+    }
+
+    return (
+        <Suspense fallback={<FullScreenSpin />}>
+            <ProductsListPage beats={beats} beatImages={beatImages} beatFiles={beatFiles}/>
+        </Suspense>
+    );
 };

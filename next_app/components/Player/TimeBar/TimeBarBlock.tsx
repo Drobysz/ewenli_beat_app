@@ -1,16 +1,15 @@
 // Props
-import { FC } from 'react';
 import { TimeBarProps } from './TimeBar.props';
 
 // Helper
 import { formatTime } from '@/helpers/dateHelpers';
 
-export const TimeBar: FC<TimeBarProps> = ({currentTime, duration, handleSeek})=> {
+export const TimeBar = ({currentTime, duration, handleSeek}: TimeBarProps)=> {
 
     return (
-        <div className='flex flex-col justify-end'>
+        <div className='flex flex-col justify-end h-full gap-1.5 pt-2 items-between'>
             <input
-                className='w-full h-4 cursor-pointer'
+                className='w-full h-4 max-[775px]:h-1.5 cursor-pointer'
                 type="range"
                 min="0"
                 max={duration}

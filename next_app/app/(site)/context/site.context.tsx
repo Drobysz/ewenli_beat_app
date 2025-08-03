@@ -1,88 +1,135 @@
 'use client';
 
 // Props/Hooks
-import { createContext, ReactNode, useState, useEffect, Dispatch, SetStateAction } from "react";
+import { createContext, ReactNode, useState, Dispatch, SetStateAction, useEffect, useRef } from "react";
 import { Categories } from "@/interfaces/Products.interface";
+import { UserSession } from "@/interfaces/UserData.interface";
+
+// Session
+import { getSessionData } from "@/app/actions/sesssions";
+
+// Auth
+import { logoutServer } from "@/app/actions/auth";
+
+// SWR
+import useSWR, { mutate } from "swr";
 
 interface CurrentBeat {
-    name: string;
-    category: Categories;
-    imgUrl: string;
-    beatUrl: string;
+    name:      string;
+    category:  Categories;
+    imgUrl:    string;
+    beatUrl:   string;
     isPlaying: boolean;
 };
 
-interface BeatIdController {
-    id: number;
-    qntty: number;
-}
+interface CurentBeatInLicenseProps {
+    name:     string, 
+    category: string
+};
 
+// initialSession
 interface SiteContextInterface {
-    isModalWindowOpen: boolean;
-    isMenuWindowOpen: boolean;
+    isModalWindowOpen:   boolean;
+    isMenuWindowOpen:    boolean;
+    sessionData?:        UserSession;
+    isLicenseWindowOpen: boolean;
+    curentBeatInLicense: CurentBeatInLicenseProps;
 
-    setModalWindow: Dispatch<SetStateAction<boolean>>;
-    setMenuWindow: Dispatch<SetStateAction<boolean>>;
+    setModalWindow:           Dispatch<SetStateAction<boolean>>;
+    setMenuWindow:            Dispatch<SetStateAction<boolean>>;
+    setLicenseWindow:         Dispatch<SetStateAction<boolean>>;
+    setCurentBeatInLicense:   Dispatch<SetStateAction<CurentBeatInLicenseProps>>;
+    refreshSessionData:       ()=> void;
 
     // Player and beats related states
-    currentBeat: CurrentBeat;
+    currentBeat:     CurrentBeat;
     isPlayerVisible: boolean;
-    beatId: BeatIdController;
 
-    setCurrentBeat: Dispatch<SetStateAction<CurrentBeat>>;
+    setCurrentBeat:      Dispatch<SetStateAction<CurrentBeat>>;
     setPlayerVisibility: Dispatch<SetStateAction<boolean>>;
-    setBeatId: Dispatch<SetStateAction<BeatIdController>>;
 }
 
 export const SiteContext = createContext<SiteContextInterface>({
-    isModalWindowOpen: false,
-    isMenuWindowOpen: false,
+    isModalWindowOpen:   false,
+    isMenuWindowOpen:    false,
+    isLicenseWindowOpen: false,
+    curentBeatInLicense: {name: "", category: ""},
     
-    setModalWindow: () => {},
-    setMenuWindow: () => {},
+    setModalWindow:         () => {},
+    setMenuWindow:          () => {},
+    setLicenseWindow:       () => {},
+    refreshSessionData:     () => {},
+    setCurentBeatInLicense: () => {},
 
     // Player and beats related states
-    currentBeat: { name: '', imgUrl: '', category: Categories.Digicore, beatUrl: '', isPlaying: false},
+    currentBeat:    { 
+                        name: '', 
+                        imgUrl: '', 
+                        category: Categories.Digicore, 
+                        beatUrl: '', 
+                        isPlaying: false
+                    },
     isPlayerVisible: false,
-    beatId: { id: -1, qntty: 0 },
 
-    setCurrentBeat: () => {},
+    setCurrentBeat:      () => {},
     setPlayerVisibility: () => {},
-    setBeatId: () => {},
 });
 
-export const SiteContextProvider = ({ children }: { children: ReactNode }) => {
-    // State of modal window with user settings
-    const [ isModalWindowOpen, setModalWindow ] = useState<boolean>(false);
-    // Menu window state
-    const [ isMenuWindowOpen, setMenuWindow ] = useState<boolean>(false);
+export const SiteContextProvider = ({ 
+    children
+}: { 
+    children:       ReactNode,
+ }) => {
+    const [ isModalWindowOpen, setModalWindow ] = useState(false);
+    const [ isMenuWindowOpen, setMenuWindow ] = useState(false);
+    const [ isLicenseWindowOpen, setLicenseWindow ] = useState(false);
+    const [ curentBeatInLicense, setCurentBeatInLicense ] = useState<CurentBeatInLicenseProps>({name: "", category: ""});
+    const {data: sessionData} = useSWR<UserSession | undefined>(
+        'session',
+        getSessionData,
+        { refreshInterval: 60_000 }
+    );
+    const prevSessionData = useRef<UserSession | undefined>(undefined);
+
+    const refreshSessionData = ()=> mutate('session');
 
     // Player and beats related states
+    const [ currentBeat, setCurrentBeat ] = useState<CurrentBeat>({ 
+        name:      '', 
+        category:  Categories.Digicore, 
+        imgUrl:    '', 
+        beatUrl:   '', 
+        isPlaying: false
+    });
+    const [ isPlayerVisible, setPlayerVisibility ] = useState(false);
+    
+    useEffect(()=> {
+        if (sessionData === undefined && prevSessionData.current !== undefined) {
+            logoutServer(prevSessionData.current.token!);
+        } else {
+            console.log('unsuccessful logout in context');
+        }
 
-    // Beat chose at the current moment
-    const [ currentBeat, setCurrentBeat ] = useState<CurrentBeat>({ name: '', category: Categories.Digicore, imgUrl: '', beatUrl: '', isPlaying: false});
-    // Player visibility state
-    const [ isPlayerVisible, setPlayerVisibility ] = useState<boolean>(false);
-    // Beat ID state
-    const [ beatId, setBeatId ] = useState<BeatIdController>({ id: -1, qntty: 0 });
-
-    useEffect(()=>{
-        setModalWindow(false);
-    }, []);
+        prevSessionData.current = sessionData
+    }, [sessionData]);
 
     return (
         <SiteContext.Provider value={{
-            isModalWindowOpen: isModalWindowOpen,
-            isMenuWindowOpen: isMenuWindowOpen,
-            currentBeat: currentBeat,
-            isPlayerVisible: isPlayerVisible,
-            beatId: beatId,
+            isModalWindowOpen:    isModalWindowOpen,
+            isMenuWindowOpen:     isMenuWindowOpen,
+            isLicenseWindowOpen:  isLicenseWindowOpen,
+            sessionData:          sessionData,
+            currentBeat:          currentBeat,
+            curentBeatInLicense:  curentBeatInLicense,
+            isPlayerVisible:      isPlayerVisible,
 
             setModalWindow,
             setMenuWindow,
+            setLicenseWindow,
+            refreshSessionData,
             setCurrentBeat,
+            setCurentBeatInLicense,
             setPlayerVisibility,
-            setBeatId
         }}>
             {children}
         </SiteContext.Provider>

@@ -12,11 +12,12 @@ import { Footer } from "./layout/Footer";
 // Context Provider
 import { SiteContextProvider } from "./context/site.context";
 
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <SiteContextProvider>
       <ModalAccountSettingsWindow />

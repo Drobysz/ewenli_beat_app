@@ -51,7 +51,7 @@ export async function getPurchasedProducts(token: string) {
                 "Content-Type" : "application/json"
             },
             next: {
-                revalidate: 3600
+                revalidate: 0
             }
         }).then(res => res.json());
 

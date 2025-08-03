@@ -7,9 +7,6 @@ import { BeatBtnsProps } from "./BeatBtns.props"
 // Components
 import { CustomBtn } from "@/components/index";
 
-// Context
-import { AppContext } from "@/app/context/app.context";
-
 // Hooks
 import { useContext } from "react";
 
@@ -19,14 +16,11 @@ import { bebas_neue } from "@/fonts/fonts";
 // Deps
 import cn from 'classnames';
 
+// Context
+import { SiteContext } from "@/app/(site)/context/site.context";
+
 export const BeatBtns: FC<BeatBtnsProps> = ({ beat, className })=> {
-    const { token, isReady } = useContext(AppContext);
-
-    if (!isReady) {
-        return null;
-    }
-
-    const isLoggedIn = typeof token === 'string';
+    const { sessionData } = useContext(SiteContext);
 
     return (
         <div className={cn("gap-4 items-center", className)}>
@@ -34,7 +28,7 @@ export const BeatBtns: FC<BeatBtnsProps> = ({ beat, className })=> {
                 {beat.price} €
             </h4>
             {
-                isLoggedIn 
+                sessionData !== undefined 
                 ?
                     <>
                         <CustomBtn
@@ -46,17 +40,17 @@ export const BeatBtns: FC<BeatBtnsProps> = ({ beat, className })=> {
                             buy
                         </CustomBtn>
 
-                        <CustomBtn
+                        {/* <CustomBtn
                             size="small"
                             color="gray-ghost"
                             icon="basket"
                             btnType="basket"
                             idx={beat.id}
-                        />
+                        /> */}
                     </>
                     
                 :
-                    <h4 className="text-gray-50 text-xl">Sign Up to buy</h4>
+                    <h4 className="text-gray-50 text-xl max-[580px]:text-base">Sign Up to buy</h4>
             }
             
         </div>

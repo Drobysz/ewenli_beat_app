@@ -15,24 +15,32 @@ import cn from "classnames";
 import Image from "next/image";
 
 // Hooks
-import { useRouter } from "next/navigation";
-import { useContext } from "react";
-
-// Context
-import { AppContext } from "@/app/context/app.context";
+import { redirect } from "next/navigation";
 
 // Fetch function
 import { deleteProductFromBasket, setProductToBasket } from "@/helpers/basketRequest";
 import { createStripeSession } from "@/helpers/stripeRequest";
 
-export const CustomBtn: FC<BtnProps> = ({size='medium', color, children, idx, stripe_price_id, icon='none', btnType='link', link='#', rgb=false, setDisplayState})=> {
-    const { token } = useContext(AppContext);
+// Session
+import { getSessionData } from "@/app/actions/sesssions";
+import { UserSession } from "@/interfaces/UserData.interface";
 
-    const router = useRouter();
-
-    const colorSet = [ '#13FFAA', '#1E67C6', '#CE84CF', '#DD335C' ];
-    const RGBcolor = useMotionValue(colorSet[0]);
-    const border = useMotionTemplate`1px solid ${RGBcolor}`;
+export const CustomBtn: FC<BtnProps> = ({
+    size='medium', 
+    color, 
+    children,
+    className, 
+    idx, 
+    stripe_price_id, 
+    icon='none', 
+    btnType='link', 
+    link='#', 
+    rgb=false, 
+    setDisplayState
+})=> {
+    const colorSet  = [ '#13FFAA', '#1E67C6', '#CE84CF', '#DD335C' ];
+    const RGBcolor  = useMotionValue(colorSet[0]);
+    const border    = useMotionTemplate`1px solid ${RGBcolor}`;
     const boxShadow = useMotionTemplate`0px 4px 25px ${RGBcolor}`;
 
     useEffect(()=>{
@@ -45,35 +53,36 @@ export const CustomBtn: FC<BtnProps> = ({size='medium', color, children, idx, st
     }, []);
 
     async function handleBtnClick () {
+        const sessionData: UserSession | undefined = await getSessionData();
         switch (btnType) {
             case 'basket':
-                if (token)
-                    setProductToBasket(token, idx!);
+                if (sessionData !== undefined)
+                    setProductToBasket(sessionData.token!, idx!);
 
-                break
+                break;
             case 'delete':
-                if (token)
-                    deleteProductFromBasket(token, idx!);
+                if (sessionData !== undefined)
+                    deleteProductFromBasket(sessionData.token!, idx!);
 
                 if(setDisplayState)
                     setDisplayState(false); 
 
-                break
+                break;
             case 'link':
                 if (link !== '#')
-                    router.push(link)
+                    redirect(link)
 
                 break
             case 'buy':
-                const stripeUrl = await createStripeSession(stripe_price_id!)
-                router.push(stripeUrl);
+                const stripeUrl = await createStripeSession(stripe_price_id!, sessionData!.email!);
+                redirect(stripeUrl);
 
-                break
+                break;
         }
     };
 
     return (
-        <motion.div  
+        <motion.button  
             onClick={handleBtnClick}
             whileHover={{scale: 1.05}}
             whileTap={{rotate: "2.5deg", scale: 0.95}}
@@ -82,10 +91,10 @@ export const CustomBtn: FC<BtnProps> = ({size='medium', color, children, idx, st
                 ease: 'backInOut'   
             }}
             style={{
-                border: rgb ? border : undefined,
+                border:    rgb ? border : undefined,
                 boxShadow: rgb ? boxShadow : undefined
             }}
-            className={cn('flex items-center justify-center gap-[3px] cursor-pointer',{
+            className={cn('flex items-center justify-center gap-[3px] cursor-pointer', className, {
                 // Sizes
                 ['text-lg rounded-lg px-6 py-3 max-h-3']: size==='small',
 
@@ -100,11 +109,11 @@ export const CustomBtn: FC<BtnProps> = ({size='medium', color, children, idx, st
 
                 [cn(courier_prime.className,'text-white bg-transparent backdrop-blur-2xl border-2 border-gray-700 min-[1280px]: px-0 py-0')]: color==='gray-ghost',
 
-                [cn('text-blue rounded-b-md bg-transparent border-1 border-blue px-2', bebas_neue.className)]: color==='blue-ghost',
+                [cn('text-blue rounded-md bg-transparent border-1 border-blue px-2', bebas_neue.className)]: color==='blue-ghost',
 
-                [cn('text-red-proj rounded-tr-md border-1 border-red-proj text-xl', bebas_neue.className)]: color==='red-ghost',
+                [cn('text-red-proj border-1 border-red-proj text-xl', bebas_neue.className)]: color==='red-ghost',
 
-                //  Icon and Type conditions
+                // Icons
                 ['hidden rotate-180 max-[710px]:block']: icon === 'arrow',
                 ['active:border-green-500']: btnType === 'basket',
 
@@ -112,7 +121,7 @@ export const CustomBtn: FC<BtnProps> = ({size='medium', color, children, idx, st
         >
             {children}
 
-            {/* Condition for icon presence */}
+            {/* Condition of icon appearing */}
             {
                 icon !== 'none' && (
                     <Image 
@@ -124,6 +133,6 @@ export const CustomBtn: FC<BtnProps> = ({size='medium', color, children, idx, st
                     />
                 )
             }
-        </motion.div>
+        </motion.button>
     );
 };

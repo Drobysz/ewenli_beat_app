@@ -29,3 +29,6 @@ export * from './Player/TimeBar/TimeBarBlock';
 export * from './Player/VolumeBar/VolumeBarBlock';
 export * from './PriceTag/PriceTagBlock';
 export * from './BeatBoxImg/BeatBoxImg';
+export * from './Animations/GlowingEffect';
+export * from './Animations/RotateObjHorizontally';
+export * from './Animations/MaskContainer';

@@ -12,7 +12,7 @@ interface BasketProps extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>
     beatImgs: BeatUrl[];
 };
 
-export const BasketPage: FC<BasketProps> = ({basketBeats, beatImgs})=> {
+export const BasketSpace: FC<BasketProps> = ({basketBeats, beatImgs})=> {
     return (
         <div className="h-[78vh] overflow-y-scroll">
             <ul 
