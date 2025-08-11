@@ -1,2 +1,3 @@
 db_init/backup.sql
 dump.rdb
+docker-compose.yaml
