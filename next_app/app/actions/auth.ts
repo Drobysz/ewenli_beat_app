@@ -59,7 +59,7 @@ export async function register (state: FormState, formData: FormData) {
         formData.get("password_confirmation") as string
     );
 
-    if (!("token" in data)) {
+    if (!data.token || data.token === undefined) {
         redirect("/register");
     }
     
