@@ -20,15 +20,19 @@ import cn from 'classnames';
 type MenuWindowProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
 export const MenuWindow: FC<MenuWindowProps> = ()=> {
-    const { isMenuWindowOpen, setMenuWindow } = useContext(SiteContext);
+    const { sessionData, isMenuWindowOpen, setMenuWindow } = useContext(SiteContext);
     const isMore1040 = useMediaQuery({ query: '(min-width: 790px)' });
-    const tabs = [
-        { href: '/', label: 'Main Page' },
-        { href: '/seller', label: 'About the seller' },
-        { href: '/shop', label: 'Shop' },
-        { href: '/inventory', label: 'Inventory' },
-        // { href: '/basket', label: 'Basket' }
+   // List of tabs
+    const baseTabs = [
+        { href: '/',       label: 'main page' },
+        { href: '/seller', label: 'about the seller' },
+        { href: '/shop',   label: 'shop' },
     ];
+    const authTabs = [
+        { href: '/inventory', label: 'inventory' },
+        // { href: '/basket',    label: 'basket' },
+    ];
+    const tabs = sessionData !== undefined ? [...baseTabs, ...authTabs] : baseTabs;
 
     useEffect(()=> setMenuWindow(false),[isMore1040]);
 
