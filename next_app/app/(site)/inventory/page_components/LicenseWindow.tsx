@@ -58,7 +58,7 @@ export const LicenseWindow = ()=> {
                             className="flex items-start gap-4"
                         >
                             <Image 
-                                className="opacity-50"
+                                className="opacity-50 max-[970px]:w-5 max-[970px]:h-5"
                                 src={term.icon}
                                 alt="term_icon"
                                 width={25}
@@ -75,27 +75,27 @@ export const LicenseWindow = ()=> {
 
 const usageTerms = [
     {
-        icon: "/logo.png",
+        icon: "/license_icons/RECORDING.svg",
         title: "USED FOR MUSIC RECORDING"
     },
     {
-        icon: "/logo.png",
+        icon: "/license_icons/COPIES.svg",
         title: "DISTRIBUTE UP TO 2,000 COPIES"
     },
     {
-        icon: "/logo.png",
+        icon: "/license_icons/STREAMS.svg",
         title: "500,000 ONLINE AUDIO STREAMS"
     },
     {
-        icon: "/logo.png",
+        icon: "/license_icons/VIDEO.svg",
         title: "1 MUSIC VIDEO"
     },
     {
-        icon: "/logo.png",
+        icon: "/license_icons/LIVE.svg",
         title: "FOR PROFIT LIVE PERFORMANCES"
     },
     {
-        icon: "/logo.png",
+        icon: "/license_icons/RADIO.svg",
         title: "RADIO BROADCASTING RIGHTS (2 STATIONS)"
     },
 ];
