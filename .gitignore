@@ -1,3 +1,7 @@
 db_init/backup.sql
 dump.rdb
 docker-compose.yaml
+secrets
+redis.conf
+conf
+nginx.conf
