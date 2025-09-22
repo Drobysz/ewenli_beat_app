@@ -17,9 +17,13 @@ use App\Http\Requests\BeatUpdateRequest;
 class BeatController extends Controller
 {
     public function index(){
-        $beats = Cache::remember('beats', now()->addMinutes(30), function(){
-            return Beat::all();
-        });
+        $beats = Cache::get('beats');
+        if ($beats == null) {
+            $beats = Beat::all();
+            if ($beats->isNotEmpty()) {
+                Cache::put('beats', $beats, now()->addMinutes(30));
+            }
+        }
 
         return response()->json($beats);
     }
