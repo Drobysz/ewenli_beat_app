@@ -1,6 +1,8 @@
+import apiBaseUrl from "./apiBaseUrl";
+
 export async function getBeatImages() {
     try {
-        const beatImgs = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/lib/beat_imgs', {
+        const beatImgs = await fetch(apiBaseUrl + '/api/lib/beat_imgs', {
             method: "GET",
             headers:{
                 "Content-Type" : "application/json",
@@ -19,7 +21,7 @@ export async function getBeatImages() {
 
 export async function getBeatFiles() {
     try {
-        const beatFiles = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/lib/beat_mp3_files', {
+        const beatFiles = await fetch(apiBaseUrl + '/api/lib/beat_mp3_files', {
             method: "GET",
             headers:{
                 "Content-Type" : "application/json",

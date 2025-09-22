@@ -1,5 +1,7 @@
+import apiBaseUrl from "./apiBaseUrl";
+
 export async function changeEmail(token: string, email: string) {
-    const res = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/change-email', {
+    const res = await fetch(apiBaseUrl + '/api/change-email', {
             method: "PATCH",
             headers:{
                 "Content-Type" : "application/json",
@@ -16,7 +18,7 @@ export async function changeEmail(token: string, email: string) {
 }
 
 export async function changeNickname(token: string, nickname: string) {
-    const res = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/change-nickname', {
+    const res = await fetch(apiBaseUrl + '/api/change-nickname', {
             method: "PATCH",
             headers:{
                 "Content-Type" : "application/json",
@@ -33,7 +35,7 @@ export async function changeNickname(token: string, nickname: string) {
 }
 
 export async function changePassword(token: string, password: string) {
-    const res = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/change-password', {
+    const res = await fetch(apiBaseUrl + '/api/change-password', {
             method: "PATCH",
             headers:{
                 "Content-Type" : "application/json",

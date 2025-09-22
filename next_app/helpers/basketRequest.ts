@@ -1,5 +1,7 @@
+import apiBaseUrl from "./apiBaseUrl";
+
 export async function getBasketContent(token: string) {
-    const res = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/basket', {
+    const res = await fetch(apiBaseUrl + '/api/basket', {
         method: "GET",
         headers:{
             'Authorization': `Bearer ${token}`,
@@ -11,7 +13,7 @@ export async function getBasketContent(token: string) {
 }
 
 export async function setProductToBasket(token: string, idx: number) {
-    fetch(process.env.NEXT_PUBLIC_DOMAIN! + `/api/basket/${idx}`, {
+    fetch(apiBaseUrl + `/api/basket/${idx}`, {
         method: "POST",
         headers:{
             'Authorization': `Bearer ${token}`,
@@ -21,7 +23,7 @@ export async function setProductToBasket(token: string, idx: number) {
 }
 
 export async function deleteProductFromBasket(token: string, idx: number) {
-    fetch(process.env.NEXT_PUBLIC_DOMAIN! + `/api/basket/${idx}`, {
+    fetch(apiBaseUrl + `/api/basket/${idx}`, {
         method: "DELETE",
         headers:{
             'Authorization': `Bearer ${token}`,

@@ -1,6 +1,8 @@
+import apiBaseUrl from "./apiBaseUrl";
+
 export async function logInQuery(email: string, password: string) {
     try {
-        const res = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/login', {
+        const res = await fetch(apiBaseUrl + '/api/login', {
             method: "POST",
             headers:{
                 "Content-Type" : "application/json",
@@ -24,7 +26,7 @@ export async function logInQuery(email: string, password: string) {
 
 export async function regQuery(name: string, email: string, password: string, password_confirmation: string) {
     try {
-        const res = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/register', {
+        const res = await fetch(apiBaseUrl + '/api/register', {
             method: "POST",
             headers:{
                 "Content-Type" : "application/json",
@@ -49,7 +51,7 @@ export async function regQuery(name: string, email: string, password: string, pa
 }
 
 export async function logOutQuery(token: string) {
-    const res = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/logout', {
+    const res = await fetch(apiBaseUrl + '/api/logout', {
         method: "POST",
         headers:{
             'Authorization': `Bearer ${token}`,

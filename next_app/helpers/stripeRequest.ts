@@ -1,5 +1,7 @@
+import apiBaseUrl from "./apiBaseUrl";
+
 export async function createStripeSession(stripe_price_id: string, email: string) {
-    const res = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/create-checkout-session', {
+    const res = await fetch(apiBaseUrl + '/api/create-checkout-session', {
         method: "POST",
         headers:{
             "Content-Type" : "application/json",
@@ -15,7 +17,7 @@ export async function createStripeSession(stripe_price_id: string, email: string
 }
 
 export async function validatePurchase(session_id: string) {
-    const res = await fetch(process.env.NEXT_PUBLIC_DOMAIN! + '/api/validate-purchase', {
+    const res = await fetch(apiBaseUrl + '/api/validate-purchase', {
         method: "POST",
         headers:{
             "Content-Type" : "application/json",
