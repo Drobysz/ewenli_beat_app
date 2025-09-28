@@ -30,15 +30,15 @@ export const ProductsListPage = ({ beats, beatImages, beatFiles, ...props }: Pro
     const [ filteredBeats, setFilteredBeats ] = useState<Beat[]>(beats);
 
     const filteredBeatsMemo = useMemo(()=>{
-        const searchFilteredBeats = searchBarRequest !== '' 
+        const filteredByRequest = searchBarRequest !== '' 
             ? beats.filter( beat => beat.name.toLowerCase().includes(searchBarRequest.toLowerCase()) ) 
             : beats;
 
-        const categoriesFilteredBeats = filteredCategoryList.length > 0
-            ? searchFilteredBeats.filter( beat => filteredCategoryList.includes(beat.categories) )
-            : searchFilteredBeats;
+        const filteredByCategories = filteredCategoryList.length > 0
+            ? filteredByRequest.filter( beat => filteredCategoryList.includes(beat.categories) )
+            : filteredByRequest;
 
-        const priceFilteredBeats = [...categoriesFilteredBeats].sort((a, b)=> 
+        const priceFilteredBeats = [...filteredByCategories].sort((a, b)=> 
             priceState
             ? (a.price > b.price ? -1 : 1)
             : (a.price < b.price ? -1 : 1)
@@ -52,7 +52,7 @@ export const ProductsListPage = ({ beats, beatImages, beatFiles, ...props }: Pro
     return (
         <div
             {...props}
-            className="border-t-1 border-l-1 border-dashed border-gray-700 h-[100vh] box-border px-5 py-6  max-[510px]:py-3 max-[510px]:px-2 justify-center"
+            className="border-t-1 border-l-1 border-dashed border-gray-700 h-[100vh] box-border px-5 py-6 max-[510px]:py-3 max-[510px]:px-2 justify-center"
         >
             <PriceTag 
                 setPriceState={setPriceState}
