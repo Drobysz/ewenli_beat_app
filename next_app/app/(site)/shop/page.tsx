@@ -34,7 +34,11 @@ export default async function ShopView () {
 
     return (
         <Suspense fallback={<FullScreenSpin />}>
-            <ProductsListPage beats={beats} beatImages={beatImages} beatFiles={beatFiles}/>
+            <ProductsListPage 
+              beats={beats} 
+              beatImages={beatImages} 
+              beatFiles={beatFiles}
+            />
         </Suspense>
     );
 };
