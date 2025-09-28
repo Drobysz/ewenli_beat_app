@@ -39,6 +39,7 @@ export const Player = ()=> {
         if (currentBeat.name !== '') {
             audioRef.current.src = currentBeat.beatUrl;
             audioRef.current.addEventListener('loadedmetadata', handleLoadedMetadata);
+            audioRef.current.volume = 0.5
             audioRef.current.play();
         }
     },[currentBeat.name]);
