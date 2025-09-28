@@ -10,7 +10,6 @@ export const SearchBar = ()=> {
     // Search bar request value
     const { setSearchBarRequest } = useContext(ShopContext);
 
-
     return (
         <input 
             type="text"
