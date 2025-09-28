@@ -26,7 +26,8 @@ export async function signup (formData: FormData) {
     await createSession(
         data.token, 
         data.user.name, 
-        data.user.email
+        data.user.email,
+        data.user.role
     );
 
     redirect("/");
@@ -66,7 +67,8 @@ export async function register (state: FormState, formData: FormData) {
     await createSession(
         data.token, 
         data.user.name, 
-        data.user.email
+        data.user.email,
+        data.user.role
     );
 
     redirect("/");

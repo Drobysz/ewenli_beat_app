@@ -1,14 +1,14 @@
 "use server"
 
 import { cookies } from 'next/headers';
-import { UserSession } from '@/interfaces/UserData.interface';
+import { UserSession, roles } from '@/interfaces/UserData.interface';
 
 // Encryption
 import { encrypt, decrypt } from './encrypt';
 
-export async function createSession(token: string, name: string, email: string) {
+export async function createSession(token: string, name: string, email: string, role: roles ) {
     const expiresAt = new Date(Date.now() + 1000 * 4 * 60 * 60);
-    const session = await encrypt({token, name, email});
+    const session = await encrypt({token, name, email, role});
     const sessionStore = await cookies();
 
     sessionStore.set("session", session, {
