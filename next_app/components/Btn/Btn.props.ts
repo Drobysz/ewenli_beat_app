@@ -1,4 +1,3 @@
-// Props
 import { HTMLMotionProps } from 'framer-motion';
 import { ReactNode } from 'react';
 

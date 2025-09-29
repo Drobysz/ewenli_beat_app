@@ -50,8 +50,7 @@ export default function Page (){
                 </h2>
             </div>
             {/* Border-Frame for the background */}
-            <div className='h-[100vh] z-20 w-full bg-transparent flex justify-center items-center mb-18'>
-            </div>
+            <div className='h-[100vh] z-20 w-full bg-transparent flex justify-center items-center mb-18' />
             
             {/* Seller's levitating maskot and caption */}
             <div className='h-fit pt-10 z-20 w-full flex flex-col gap-6 justify-center items-center mb-30 max-[820px]:gap-16'>

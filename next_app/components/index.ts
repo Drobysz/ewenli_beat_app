@@ -32,3 +32,4 @@ export * from './BeatBoxImg/BeatBoxImg';
 export * from './Animations/GlowingEffect';
 export * from './Animations/RotateObjHorizontally';
 export * from './Animations/MaskContainer';
+export * from './Btns/AdminBtn/AdminBtn';

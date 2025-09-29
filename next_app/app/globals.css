@@ -14,14 +14,15 @@
     --color-gray-900: #191818;
 
     /* The other multicolored colors */
-    --color-pinkish : #953396;
-    --color-blue : #0F1EF0;
-    --color-gold : #E2BA41;
-    --color-dark-gold : #92792E;
-    --color-red-proj : #FF0000;
+    --color-pinkish :     #953396;
+    --color-blue :        #0F1EF0;
+    --color-gold :        #E2BA41;
+    --color-dark-gold :   #92792E;
+    --color-red-proj :    #FF0000;
     --color-red-burgundy: #880808;
-    --color-link-blue : #78A0FF;
-    --color-dark-blue: #00008B;
+    --color-link-blue :   #78A0FF;
+    --color-dark-blue:    #00008B;
+    --color-green-light:  #44ED2A;
 
     /* text shadow */
     --drop-shadow-text-link: 0px 0px 5px #00F5FD;
