@@ -29,7 +29,9 @@ export default function Page (){
     return (
         <>
             {/* Background */}
-            <div className="absolute inset-0 z-1 overflow-hidden" style={{ width: '100vw', height: '120vh' }}>
+            <div className={cn(
+                "absolute inset-0 z-1 overflow-hidden",
+                "w-[100vw] h-[120vh] max-[550px]:h-[85vh]")}>
                 <div
                     style={{
                         position: 'absolute',
@@ -44,13 +46,13 @@ export default function Page (){
             </div>
             
             {/* Title */}
-            <div className='h-[100vh] z-2 w-full absolute inset-0 flex flex-col justify-center items-center gap-10 mb-30'>
+            <div className='h-[100vh] max-[550px]:h-[85vh] z-2 w-full absolute inset-0 flex flex-col justify-center items-center gap-10 mb-30'>
                 <h2 className={cn('text-black/30 text-9xl max-[660px]:text-8xl max-[590px]:text-6xl', kiloy.className)}>
                     EWENLI
                 </h2>
             </div>
             {/* Border-Frame for the background */}
-            <div className='h-[100vh] z-20 w-full bg-transparent flex justify-center items-center mb-18' />
+            <div className='h-[100vh] max-[550px]:h-[85vh] max-[550px]:mb-4 z-20 w-full bg-transparent flex justify-center items-center mb-18' />
             
             {/* Seller's levitating maskot and caption */}
             <div className='h-fit pt-10 z-20 w-full flex flex-col gap-6 justify-center items-center mb-30 max-[820px]:gap-16'>
@@ -67,15 +69,17 @@ export default function Page (){
             </div>
             
             {/* Feed with data on the seller's achivements */}
-            <GrayFeed className='py-3 flex justify-around mb-25 max-[600px]:flex-col max-[600px]:gap-20'>
-                {
-                    feedData.map( obj => (
-                        <div key={obj.k} className='flex flex-col gap-3 text-4xl text-white text-center'>
-                            <h2 className={cn(climate_crisis.className)}>{obj.n}</h2>
-                            <h2 className={cn(cinzel.className, 'flex flex-col items-center')}>{obj.t.split(' ').map(w => <span key={w}>{w}</span>)}</h2>
-                        </div>
-                    ) )
-                }
+            <GrayFeed className='py-3 mb-25 flex justify-center'>
+                <div className='w-[850px] flex justify-around max-[600px]:flex-col max-[600px]:gap-20'>
+                    {
+                        feedData.map( obj => (
+                            <div key={obj.k} className='flex flex-col gap-3 text-4xl text-white text-center'>
+                                <h2 className={cn(climate_crisis.className)}>{obj.n}</h2>
+                                <h2 className={cn(cinzel.className, 'flex flex-col items-center')}>{obj.t.split(' ').map(w => <span key={w}>{w}</span>)}</h2>
+                            </div>
+                        ) )
+                    }
+                </div>
             </GrayFeed>
 
             {/* Container with animation of filling of paragraph  */}
