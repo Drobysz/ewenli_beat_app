@@ -65,7 +65,7 @@ export default function Home() {
       </section>
 
       {/* Container dedicated to shop */}
-      <section className="flex gap-9 justify-center items-center mb-60 max-[1280px]:px-20 max-[550px]:px-3 max-[670px]:mb-36 max-[490px]:justify-between">
+      <section className="flex justify-between items-center mb-60 pr-10 max-[800px]:pr-5 max-[550px]:px-3 max-[670px]:mb-36 max-[670px]:pr-2">
         <RotateObjHorizontally
           className="rounded-full aspect-square p-8 max-[715px]:p-7 max-[550px]:p-4 max-[420px]:p-0"
         >
@@ -78,11 +78,11 @@ export default function Home() {
           />
         </RotateObjHorizontally>
 
-        <div className="flex flex-col items-end gap-10 max-[670px]:gap-5 max-[490px]:w-[35%] max-[420px]:w-[50%]">
+        <div className="flex flex-col items-end h-full gap-10 max-[670px]:gap-5 max-[580px]:w-[35%] max-[420px]:w-[50%]">
           <MaskContainer
-            maskClassName="text-4xl leading-12 text-center max-[1055px]:text-3xl max-[1055px]:leading-8 max-[960px]:text-2xl max-[960px]:leading-7 max-[670px]:text-lg max-[670px]:leading-5 max-[550px]:text-base max-[550px]:leading-4 max-[490px]:text-sm"
+            maskClassName="text-4xl leading-12 text-center max-[1160px]:text-3xl max-[1055px]:leading-10 max-[960px]:text-2xl max-[960px]:leading-9 max-[670px]:text-base max-[670px]:leading-7 max-[580px]:text-sm max-[580px]:leading-6"
 
-            revealText={<p className="text-white text-5xl leading-14 text-right max-[1155px]:text-3xl max-[960px]:text-2xl max-[960px]:leading-10 max-[670px]:text-xl [670px]:leading-6 max-[550px]:text-lg max-[550px]:leading-6 max-[490px]:text-s"
+            revealText={<p className="text-white h-full text-5xl leading-14 text-right max-[1155px]:text-3xl max-[960px]:text-2xl max-[960px]:leading-10 max-[670px]:text-xl max-[670px]:leading-7 max-[550px]:text-lg max-[550px]:leading-6 max-[490px]:text-sm"
             >
               Join the Telegram for early drops, rare samples, and custom exclusives made on request. 
               No noise — just raw, direct sound you won’t find anywhere else.

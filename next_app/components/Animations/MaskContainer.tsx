@@ -41,19 +41,17 @@ export const MaskContainer = ({
   const y = mousePosition.y - maskSize / 2;
 
   useEffect(()=> {
-    if (windowWidth <= 1150 && windowWidth > 670) {
-      setRevSize(400);
-    } 
-
-    if (windowWidth <= 670 && windowWidth > 490) {
-      setRevSize(250);
-
-    } 
-
-    if (windowWidth <= 490) {
+    if (windowWidth <= 450) {
+      setRevSize(170);
+    } else if (windowWidth <= 540) {
       setRevSize(200);
-    } 
-
+    } else if (windowWidth <= 750) {
+      setRevSize(230);
+    } else if (windowWidth <= 960) {
+      setRevSize(300);
+    } else if (windowWidth <= 1150) {
+      setRevSize(500);
+    }
   }, [isHovered, windowWidth]);
 
   const coord = useMotionTemplate`${x}px ${y}px`;
