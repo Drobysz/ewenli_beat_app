@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 import { climate_crisis } from "@/fonts/fonts";
 
 // Components
-import { CustomBtn } from "@/components/Btn/CustomBtn";
+import { CustomBtn } from "@/components/Btns/CustomBtn/CustomBtn";
 import Image from "next/image";
 
 // Dependencies
