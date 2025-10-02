@@ -20,14 +20,12 @@ export const CategList = ()=> {
 
     return (
         <ul
-            className={cn("border-l-3 border-[#686868] flex flex-col gap-9 max-[375px]:gap-4 pl-4 max-[335px]:pl-2 w-full max-w-[172px] max-[435px]:w-[123px] max-[375px]:w-[106px] max-[335px]:w-[86px]", handjet.className)}
+            className={cn("border-l-3 border-[#686868] flex flex-col gap-9 max-[952px]:gap-6 max-[590px]:gap-4 pl-4 max-[590px]:pl-2 w-full max-w-[172px] max-[952px]:w-[123px] max-[590px]:w-[106px] max-[520px]:w-[86px]", handjet.className)}
         >
-            {
-                categoryList.map( (category, idx)=> <Option 
-                    key={idx} 
-                    category={category}/> 
-                )
-            }
+            {categoryList.map( (category, idx)=> <Option 
+                key={idx} 
+                category={category}/> 
+            )}
         </ul>
     )
 };

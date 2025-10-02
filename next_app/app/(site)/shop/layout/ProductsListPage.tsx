@@ -1,19 +1,11 @@
 'use client'
 
-// Props
 import { DetailedHTMLProps, HTMLAttributes } from "react";
 import { Beat } from "@/interfaces/Products.interface";
 import { BeatUrl } from "@/interfaces/s3ElementData.interface";
-
-// Hooks
 import { useState, useContext, useEffect, useMemo } from "react";
-
-// Context
 import { ShopContext } from "../context/shop.context";
-
-// Component
-import { BeatBox } from "@/components/index";
-import { PriceTag } from "@/components/index";
+import { BeatBox, PriceTag } from "@/components/index";
 
 interface ProductsListPageProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>{
     beats:      Beat[];
@@ -58,32 +50,22 @@ export const ProductsListPage = ({ beats, beatImages, beatFiles, ...props }: Pro
                 setPriceState={setPriceState}
                 priceState={priceState}
             />
-            
-            <div 
-                className="w-full border-2 border-gray-50/70 rounded-full mb-6"
-            />
-
+            <div className="w-full border-2 border-gray-50/70 rounded-full mb-6 max-[580px]:border-1" />
             <ul 
                 className="h-[68%] overflow-y-scroll overflow-x-hidden mb-6 grid grid-cols-[repeat(auto-fit,minmax(200px,400px))] justify-center content-start gap-x-6 gap-y-6"
             >
-                {
-                    filteredBeats.map( (beat, idx)=> (
-                        <BeatBox 
-                            key={idx} 
-                            beat={beat} 
-                            beatImg={beatImages.find( bimg => bimg.local_name.includes(beat.name + '.png') )!} 
-                            beatFile={beatFiles.find( bfile => bfile.local_name.includes(beat.name + '.mp3') )!} 
-                            idx={idx}  
-                            mode='shop'
-                        />
-                    ) 
-                    )
-                }
+                {filteredBeats.map( (beat, idx)=> (
+                    <BeatBox 
+                        key={idx} 
+                        beat={beat} 
+                        beatImg={beatImages.find( bimg => bimg.local_name.includes(beat.name + '.png') )!} 
+                        beatFile={beatFiles.find( bfile => bfile.local_name.includes(beat.name + '.mp3') )!} 
+                        idx={idx}  
+                        mode='shop'
+                    />
+                ))}
             </ul>
-
-            <div 
-                className="w-full border-2 border-gray-50/70 rounded-full"
-            />
+            <div className="w-full border-2 border-gray-50/70 rounded-full max-[580px]:border-1" />
         </div>
     );
 }
