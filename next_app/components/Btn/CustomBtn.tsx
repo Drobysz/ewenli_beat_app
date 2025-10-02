@@ -58,7 +58,6 @@ export const CustomBtn: FC<BtnProps> = ({
             case 'basket':
                 if (sessionData !== undefined)
                     setProductToBasket(sessionData.token!, idx!);
-
                 break;
             case 'delete':
                 if (sessionData !== undefined)
@@ -66,17 +65,14 @@ export const CustomBtn: FC<BtnProps> = ({
 
                 if(setDisplayState)
                     setDisplayState(false); 
-
                 break;
             case 'link':
                 if (link !== '#')
                     redirect(link)
-
                 break
             case 'buy':
                 const stripeUrl = await createStripeSession(stripe_price_id!, sessionData!.email!);
                 redirect(stripeUrl);
-
                 break;
         }
     };
@@ -96,7 +92,7 @@ export const CustomBtn: FC<BtnProps> = ({
             }}
             className={cn('flex items-center justify-center gap-[3px] cursor-pointer', className, {
                 // Sizes
-                ['text-lg rounded-lg px-6 py-3 max-h-3']: size==='small',
+                ['text-lg rounded-lg px-6 py-3 max-h-3 max-[580px]:text-[0.6rem] max-[580px]:py-2 max-[580px]:px-3']: size==='small',
 
                 ['text-xl rounded-xl px-[0.563rem] py-1.5']: size==='medium',
 
