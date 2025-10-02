@@ -22,7 +22,7 @@ export * from './AccountDataForm/AccountDataForm';
 export * from './SearchBar';
 export * from './Option';
 export * from './BeatBox/BeatBox';
-export * from './BeatBtn/BeatBtns';
+export * from './Btns/BeatBtn/BeatBtns';
 export * from './Player/BeatTitle/BeatTitleBlock';
 export * from './Player/PlayerController/PlayerControllerBlock';
 export * from './Player/TimeBar/TimeBarBlock';
