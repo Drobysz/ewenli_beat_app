@@ -1,20 +1,10 @@
 'use client'
 
-// Props/Hooks
 import { useState, useContext } from "react";
 import BeatBoxProps from "./BeatBox.interface";
-
-// Font 
 import { impact, bagel_fat_one } from "@/fonts/fonts";
-
-// Components
 import { BeatBtns, BeatBoxImg, CustomBtn } from "@/components/index";
-import Image from "next/image";
-
-// Context
 import { SiteContext } from "@/app/(site)/context/site.context";
-
-// Dep
 import cn from 'classnames';
 
 export const BeatBox = ({ 
@@ -24,7 +14,6 @@ export const BeatBox = ({
     idx, 
     mode 
 }: BeatBoxProps)=> {
-    const [ scaleState, setScaleState ]     = useState(false);
     const [ displayState, setDisplayState ] = useState(true);
     const [ isHovered, setHover ]           = useState(false);
 
@@ -36,6 +25,9 @@ export const BeatBox = ({
         setLicenseWindow,
         setCurentBeatInLicense
     } = useContext(SiteContext);
+
+    const isPlaying = currentBeat.name === beat.name ? currentBeat.isPlaying : false;
+    const imgUrl = beatImg !== undefined ? beatImg.url : '/swrc.png'
 
     const changeBeat = ()=> {
         setCurrentBeat({
@@ -51,7 +43,6 @@ export const BeatBox = ({
         if (isPlayerVisible === false) {
             setPlayerVisibility(true);
         }
-
         if (currentBeat.name !== beat.name){
             changeBeat();
         } else {
@@ -88,14 +79,12 @@ export const BeatBox = ({
                     <BeatBoxImg 
                         mode={mode}
                         handleResumeClick={handleResumeClick}
-                        isPlaying={currentBeat.name === beat.name ? currentBeat.isPlaying : false}
+                        isPlaying={isPlaying}
                         isHovered={isHovered}
-                        imgUrl={beatImg !== undefined ? beatImg.url : '/swrc.png'}
+                        imgUrl={imgUrl}
                     />
-
                     <hr className="bg-gray-700 w-0.5 h-full"/>
-
-                    <div className="flex flex-col justify-between h-[82px] max-[580px]:h-[51px]">
+                    <div className="flex flex-col justify-between items-start h-[82px] max-[580px]:h-[51px]">
                         <h3 className={cn(
                             'text-xl max-[580px]:text-base max-[580px]:leading-4 transition-all duration-500', 
                             bagel_fat_one.className, 
@@ -105,58 +94,26 @@ export const BeatBox = ({
                             })}>
                             {beat.name}
                         </h3>
-
-                        {
-                            mode === "shop" && (
-                                <>
-                                    <Image 
-                                        src='/arrowWhite.svg'
-                                        width={34}
-                                        height={34}
-                                        alt="arrow"
-                                        className={cn("rounded-full border-2 border-gray-50 transition-all duration-300 hidden max-[580px]:w-[17px] max-[580px]:h-[17px] max-[730px]:block", {
-                                            ['-rotate-90']: scaleState,
-                                            ['rotate-0']: !scaleState,
-                                        })}
-                                        onClick={()=> setScaleState(!scaleState)}
-                                    />
-
-                                    <BeatBtns 
-                                        beat={beat}
-                                        className='flex justify-center max-[730px]:hidden'
-                                    />
-                                </>     
-                            )
-                        }
-
-                        {
-                            mode === 'basket' && (
-                                <CustomBtn 
-                                    color="red-ghost"
-                                    className="w-fit h-fit"
-                                    size="medium"
-                                    idx={beat.id}
-                                    btnType="delete"
-                                    setDisplayState={setDisplayState}
-                                >
-                                    Delete
-                                </CustomBtn>
-                            )
-                        }
+                        {mode === "shop" && (
+                            <BeatBtns 
+                                beat={beat}
+                                className='flex justify-center'
+                            />
+                        )}
+                        {mode === 'basket' && (
+                            <CustomBtn 
+                                color="red-ghost"
+                                className="w-fit h-fit"
+                                size="medium"
+                                idx={beat.id}
+                                btnType="delete"
+                                setDisplayState={setDisplayState}
+                            >
+                                Delete
+                            </CustomBtn>
+                        )}
                     </div>
                 </div>   
-
-                {
-                    mode == 'shop' && (
-                        <BeatBtns 
-                            beat={beat}
-                            className={cn({
-                                ['hidden']: !scaleState,
-                                ['flex justify-center min-[730px]:hidden']: scaleState
-                            })}
-                        />
-                    )
-                }
             </div>
         </li>
     );
