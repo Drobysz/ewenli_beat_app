@@ -97,7 +97,10 @@ export const BeatBox = ({
                         isHovered={isHovered}
                     />
                     {mode === "shop" &&
-                        <BeatBtns className='flex justify-center' />
+                        <BeatBtns
+                            className='flex justify-center'
+                            price={beat.price}
+                        />
                     }
                     {mode === 'workshop' &&
                         <WSBtns 

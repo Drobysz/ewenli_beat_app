@@ -3,13 +3,23 @@
 import { CustomBtn } from "@/components/index";
 import { useContext } from "react";
 import { SiteContext } from "@/app/context/site.context";
+import { bebas_neue } from "@/fonts/fonts";
 import cn from 'classnames';
 
-export const BeatBtns = ({ className='' }: { className?: string })=> {
+export const BeatBtns = ({ 
+    className='',
+    price 
+}: {
+    className?: string,
+    price: number
+})=> {
     const { sessionData } = useContext(SiteContext);
 
     return (
         <div className={cn("gap-4 max-[620px]:gap-2 items-center", className)}>
+            <h4 className={cn("text-gold text-2xl max-[612px]:text-xl", bebas_neue.className)}>
+                {price} €
+            </h4>
             {sessionData !== undefined 
                 ?
                     <>
