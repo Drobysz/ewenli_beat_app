@@ -8,5 +8,5 @@ export default interface BeatBoxProps extends DetailedHTMLProps<HTMLAttributes<H
     beatImg: BeatUrl;
     beatFile?: BeatUrl;
     idx: number;
-    mode: 'basket' | 'shop' | 'inventory';
+    mode: 'basket' | 'shop' | 'inventory' | 'workshop';
 }

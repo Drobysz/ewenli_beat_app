@@ -24,7 +24,11 @@ export const ServiceCard = ({ title, description, img }: ServiceCardProps) => {
                 duration: 0.5,
                 ease: 'anticipate'
             }}
-            className="max-w-[300px] min-w-[200px] w-full h-[433px] rounded-2xl overflow-hidden relative bg-[#050301]"
+            className={cn(
+                "max-w-[300px] min-w-[200px]",
+                "w-full h-[433px] rounded-2xl",
+                "overflow-hidden relative bg-[#050301]"
+            )}
         >
 
             {/* Card image */}
@@ -40,25 +44,29 @@ export const ServiceCard = ({ title, description, img }: ServiceCardProps) => {
             {/* Extandable Container with text content*/}
             <motion.div 
                 className="absolute flex flex-col gap-2.5 p-2.5 backdrop-blur-lg"
+
                 whileHover={{y: -257}}
                 onMouseEnter={()=> setPrghHighlighted(true)}
                 onMouseLeave={()=> setPrghHighlighted(false)}
                 onTouchStart={()=> setPrghHighlighted(true)}
-                onTouchEnd={()=> setPrghHighlighted(false)}
+                onTouchEnd={()=>   setPrghHighlighted(false)}
 
                 transition={{
                     duration: 0.7,
                     ease: 'easeInOut'
                 }}
             >
-                <h2 className={cn("text-2xl text-white", bebas_neue.className)}>{title}</h2>
-                <p 
-                    className={cn("text-base text-[#787878]", 
-                        {
-                            ["text-link-blue"]: isPrghHighlighted
-                        }, 
-                        baumans.className)}
-                >
+                <h2 className={cn(
+                    "text-2xl text-white",
+                    bebas_neue.className
+                )}>
+                    {title}
+                </h2>
+                <p className={cn(
+                    "text-base text-[#787878]",
+                    baumans.className, {
+                    ["text-link-blue"]: isPrghHighlighted
+                })}>
                     {description}
                 </p>
             </motion.div>

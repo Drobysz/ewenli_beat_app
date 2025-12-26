@@ -19,7 +19,7 @@ import { impact, avenir } from "@/fonts/fonts";
 import cn from 'classnames';
 
 // Context
-import { SiteContext } from "@/app/(site)/context/site.context";
+import { SiteContext } from "@/app/context/site.context";
 import { FullScreenSpin } from "../FullScreenSpin";
 
 

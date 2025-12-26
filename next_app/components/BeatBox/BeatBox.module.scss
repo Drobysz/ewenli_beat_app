@@ -1,0 +1,33 @@
+@reference "tailwindcss";
+
+.enum {
+	@apply text-3xl text-white
+		max-[580px]:text-xl;
+}
+
+.box {
+	@apply rounded-[2rem]
+		w-[90%] h-[110px]
+		transition-all
+		duration-500 p-4
+		flex items-center gap-3
+		max-[580px]:h-[70px]
+		max-[580px]:rounded-xl
+		max-[580px]:p-2;
+}
+
+.box_workshop {
+	@apply bg-gray-100
+		hover:bg-gray-100/70;
+}
+
+.box_default {
+	@apply bg-gray-800
+		hover:bg-gray-800/65;
+}
+
+.info_sect {
+	@apply flex flex-col h-[82px]
+		justify-between items-start
+		max-[580px]:h-[51px];
+}

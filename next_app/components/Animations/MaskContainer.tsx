@@ -65,7 +65,12 @@ export const MaskContainer = ({
       className={cn("relative h-full bg-[#0a0a0a]", className)}
     >
       <motion.div
-        className="absolute rounded-3xl flex h-full w-full z-100 items-center justify-center bg-white text-black text-6xl [mask-image:url(/mask.svg)] [mask-repeat:no-repeat]"
+        className={cn(
+          "absolute rounded-3xl flex h-full w-full",
+          "z-100 items-center justify-center bg-white",
+          "text-black text-6xl [mask-image:url(/mask.svg)]",
+          "[mask-repeat:no-repeat]"
+        )}
         style={{
           maskPosition: coord,
           maskSize:     mask,
@@ -82,13 +87,20 @@ export const MaskContainer = ({
           onMouseLeave={() => {
             setIsHovered(false);
           }}
-          className={cn("relative z-20 mx-auto max-w-4xl text-center font-bold", maskClassName)}
+          className={cn(
+            "relative z-20 mx-auto",
+            "max-w-4xl text-center font-bold",
+            maskClassName
+          )}
         >
           {children}
         </div>
       </motion.div>
  
-      <div className="flex h-full w-full items-center justify-center">
+      <div className={cn(
+        "flex h-full w-full",
+        "items-center justify-center"
+      )}>
         {revealText}
       </div>
     </motion.div>

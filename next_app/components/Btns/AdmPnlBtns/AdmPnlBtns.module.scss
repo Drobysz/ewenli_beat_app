@@ -1,0 +1,9 @@
+@reference "tailwindcss";
+
+.btn {
+	@apply rounded-full overflow-x-hidden
+			cursor-pointer active:scale-95
+			active:opacity-70 active:border-2
+			active:border-white duration-300
+			transition-all;
+}

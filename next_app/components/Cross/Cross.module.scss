@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.cross {
+	@apply cursor-pointer
+		hover:opacity-60
+		hover:scale-105
+		active:opacity-60
+		active:scale-96
+		justify-self-end
+		max-[775px]:w-[25px]
+		max-[775px]:h-[25px]
+		transition-all duration-500;
+}
