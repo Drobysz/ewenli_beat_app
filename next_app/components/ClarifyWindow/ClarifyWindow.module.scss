@@ -1,0 +1,14 @@
+@reference "tailwindcss";
+
+.window {
+	@apply top-[50%] left-[50%]
+		translate-x-[-50%] translate-y-[-50%]
+		z-20 backdrop-blur-lg bg-gray-300/60
+		py-3.5 px-5 rounded-3xl border-1
+		border-zinc-700 h-fit w-[40%]
+		flex flex-col gap-3;
+}
+
+.notification {
+	@apply text-xl text-gray-500;
+}

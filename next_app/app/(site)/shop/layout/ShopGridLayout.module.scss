@@ -1,7 +1,7 @@
 .wrapper{
     display: grid;
     min-height: 100vh;
-    grid-template-columns: minmax(100px, 300px) minmax(220px, 1fr);
+    grid-template-columns: minmax(100px, 0.3fr) minmax(220px, 1fr);
     grid-template-rows: 90px 1fr;
     grid-template-areas: 
     "logo search"

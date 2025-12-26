@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.btn {
+	@apply px-3 py-2 border hover:scale-x-110;
+}
+
+.btn_confirm {
+	@apply ;
+}
+
+.btn_cancel {
+	@apply ;
+}

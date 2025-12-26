@@ -29,7 +29,7 @@ export const ShopContext = createContext<ShopInterface>({
 
 export const ShopContextProvider = ({ children }: { children: ReactNode }) => {
     // SearchBar value
-    const [ searchBarRequest, setSearchBarRequest ] = useState<string>('');
+    const [ searchBarRequest, setSearchBarRequest ] = useState('');
     // List of categories from API
     const [ categoryList, setCategoryList ] = useState<Categories[]>([]);
     // List of filtered categories

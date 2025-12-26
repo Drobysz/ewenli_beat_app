@@ -1,5 +1,5 @@
 // Page
-import { ProductsListPage } from "./layout/ProductsListPage";
+import { ProductsListPage } from "./layout/ProductListPage/ProductsListPage";
 
 // Props
 import { Beat } from "@/interfaces/Products.interface";
@@ -34,7 +34,11 @@ export default async function ShopView () {
 
     return (
         <Suspense fallback={<FullScreenSpin />}>
-            <ProductsListPage beats={beats} beatImages={beatImages} beatFiles={beatFiles}/>
+            <ProductsListPage 
+              beats={beats} 
+              beatImages={beatImages} 
+              beatFiles={beatFiles}
+            />
         </Suspense>
     );
 };

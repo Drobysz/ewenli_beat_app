@@ -3,14 +3,11 @@ import styles from './layout/GridLayout.module.scss'
 
 // Layout components
 import { Header } from "./layout/Header";
-import { ModalAccountSettingsWindow } from "./layout/ModalAccountSettingsWindow";
+import { ModalAccountSettingsWindow } from "./layout/MASWindow/MASWindow";
 import { MenuWindow } from "./layout/MenuWindow";
-import { Player } from "./layout/Player";
 import { OpacityWrapper } from "./layout/OpacityWrapper";
 import { Footer } from "./layout/Footer";
-
-// Context Provider
-import { SiteContextProvider } from "./context/site.context";
+import { Player } from "@/components/index";
 
 export default async function SiteLayout({
   children,
@@ -19,7 +16,7 @@ export default async function SiteLayout({
 }>) {
 
   return (
-    <SiteContextProvider>
+    <>
       <ModalAccountSettingsWindow />
       <MenuWindow />
       <Player />
@@ -30,6 +27,6 @@ export default async function SiteLayout({
           </main>
           <Footer className={styles.footer}/>
       </OpacityWrapper>
-    </SiteContextProvider>
+    </>
   );
 }

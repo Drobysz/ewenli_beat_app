@@ -1,0 +1,11 @@
+@reference "tailwindcss";
+
+.mas_title {
+	@apply text-center text-white/70 text-5xl;
+}
+
+.mas_cross {
+	@apply absolute right-3 top-3
+	cursor-pointer hover:scale-105
+	transition-all duration-500;
+}

@@ -36,7 +36,7 @@ export const ScrollPBlock = () => {
                 />
                 <ScrollParagraph 
                     scrollYProgress={scrollYProgress} 
-                    className={cn(b216.className, 'flex flex-wrap gap-1.5 text-white w-[450px] max-[920px]:text-xs')}
+                    className={cn(b216.className, 'flex flex-wrap gap-1.5 text-white max-w-[450px] min-w-[50px] max-[920px]:text-xs max-[680px]:text-center')}
                 >Ewenli’s rabbit wasn’t born in a forest — it came from a crashed USB stick. A glitch in the code sparked its heartbeat, and from that moment, the rabbit’s fur shimmered with broken pixels and neon static. It’s not just a mascot — it’s the spirit animal of chaos and creation. Always running, never caught, the rabbit dives headfirst into noise, distortion, and melody like it’s a second nature. Some say it only appears at 3 a.m. when the beat finally hits right. Others believe it lives inside every synth preset gone wrong. But for Ewenli, the rabbit is a reminder: perfection is boring — chase the glitch.
                 </ScrollParagraph>
             </div>

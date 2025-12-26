@@ -7,7 +7,7 @@
     grid-template-areas: 
     "header header header"
     ". main ."
-    "footer  footer footer";
+    "footer footer footer";
 };
 
 // Grid area and display setting
@@ -29,7 +29,7 @@
 
 // Mobile layout
 
-@media (max-width: 1280px) {
+@media (max-width: 1440px) {
     .wrapper {
         grid-template-columns: minmax(320px, 1fr);
         grid-template-areas: 

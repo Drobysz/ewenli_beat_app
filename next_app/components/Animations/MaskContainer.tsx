@@ -41,19 +41,17 @@ export const MaskContainer = ({
   const y = mousePosition.y - maskSize / 2;
 
   useEffect(()=> {
-    if (windowWidth <= 1150 && windowWidth > 670) {
-      setRevSize(400);
-    } 
-
-    if (windowWidth <= 670 && windowWidth > 490) {
-      setRevSize(250);
-
-    } 
-
-    if (windowWidth <= 490) {
+    if (windowWidth <= 450) {
+      setRevSize(170);
+    } else if (windowWidth <= 540) {
       setRevSize(200);
-    } 
-
+    } else if (windowWidth <= 750) {
+      setRevSize(230);
+    } else if (windowWidth <= 960) {
+      setRevSize(300);
+    } else if (windowWidth <= 1150) {
+      setRevSize(500);
+    }
   }, [isHovered, windowWidth]);
 
   const coord = useMotionTemplate`${x}px ${y}px`;
@@ -67,7 +65,12 @@ export const MaskContainer = ({
       className={cn("relative h-full bg-[#0a0a0a]", className)}
     >
       <motion.div
-        className="absolute rounded-3xl flex h-full w-full z-100 items-center justify-center bg-white text-black text-6xl [mask-image:url(/mask.svg)] [mask-repeat:no-repeat]"
+        className={cn(
+          "absolute rounded-3xl flex h-full w-full",
+          "z-100 items-center justify-center bg-white",
+          "text-black text-6xl [mask-image:url(/mask.svg)]",
+          "[mask-repeat:no-repeat]"
+        )}
         style={{
           maskPosition: coord,
           maskSize:     mask,
@@ -84,13 +87,20 @@ export const MaskContainer = ({
           onMouseLeave={() => {
             setIsHovered(false);
           }}
-          className={cn("relative z-20 mx-auto max-w-4xl text-center font-bold", maskClassName)}
+          className={cn(
+            "relative z-20 mx-auto",
+            "max-w-4xl text-center font-bold",
+            maskClassName
+          )}
         >
           {children}
         </div>
       </motion.div>
  
-      <div className="flex h-full w-full items-center justify-center">
+      <div className={cn(
+        "flex h-full w-full",
+        "items-center justify-center"
+      )}>
         {revealText}
       </div>
     </motion.div>

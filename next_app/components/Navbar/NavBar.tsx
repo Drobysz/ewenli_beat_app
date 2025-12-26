@@ -21,7 +21,7 @@ import { avenir } from "@/fonts/fonts";
 import Link from "next/link";
 
 // Context
-import { SiteContext } from "@/app/(site)/context/site.context";
+import { SiteContext } from "@/app/context/site.context";
 
 export const NavBar = () => {
     const { sessionData } = useContext(SiteContext);

@@ -2,24 +2,29 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import {CancelTitle} from "./components/CancelTitle";
+import cn from "classnames";
 
 export default function FailedPaymentPage () {
     const router = useRouter();
 
-        useEffect(() => {
-            const failedTime = setTimeout(() => {
-                console.log("Redirecting after 5s...");
-                router.push("/");
-            }, 5000);
+    useEffect(() => {
+        const failedTime = setTimeout(() => {
+            console.log("Redirecting after 5s...");
+            router.push("/");
+        }, 5000);
 
-            return () => clearTimeout(failedTime);
-        }, []);
+        return () => clearTimeout(failedTime);
+    }, []);
 
     return (
-        <main className="h-[100vh] flex justify-center items-center">
-            <h1 className="text-zinc-700 text-7xl max-[1060px]:text-6xl max-[780px]:text-4xl max-[520px]:text-2xl">
+        <main className={cn(
+            "h-[100vh] flex",
+            "justify-center items-center"
+        )}>
+            <CancelTitle>
                 Payment failed. Redirecting...
-            </h1>
+            </CancelTitle>
         </main>
     );
 };
