@@ -2,7 +2,7 @@
 
 @theme {
     /* palette of the shades of gray */
-    --color-gray-50: #979696;
+    --color-gray-50:  #979696;
     --color-gray-100: #8E8787;
     --color-gray-200: #504E4E;
     --color-gray-300: #363434;
@@ -56,4 +56,10 @@ body {
         350% 50%;
     }
   }
+}
+
+@property --menu {
+  syntax: '<length-percentage>';
+  inherits: false;
+  initial-value: 50px;
 }
