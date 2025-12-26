@@ -1,0 +1,10 @@
+@reference "tailwindcss";
+
+.mas_window {
+	@apply flex-col gap-6 z-10
+		top-[50%] left-[50%]
+		translate-x-[-50%] translate-y-[-50%]
+		w-[420px] h-fit backdrop-blur-xl
+		bg-gray-300/10 py-11 px-10 rounded-3xl
+		border-1 border-zinc-700;
+}

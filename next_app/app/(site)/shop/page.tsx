@@ -1,5 +1,5 @@
 // Page
-import { ProductsListPage } from "./layout/ProductsListPage";
+import { ProductsListPage } from "./layout/ProductListPage/ProductsListPage";
 
 // Props
 import { Beat } from "@/interfaces/Products.interface";

@@ -7,7 +7,7 @@ import { DetailedHTMLProps, FC, HTMLAttributes, ReactNode } from "react";
 import { useContext } from "react";
 
 // Context
-import { SiteContext } from "../context/site.context";
+import { SiteContext } from "../../context/site.context";
 
 // Deps
 import cn from 'classnames';

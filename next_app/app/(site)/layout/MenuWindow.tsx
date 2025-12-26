@@ -5,7 +5,7 @@ import { DetailedHTMLProps, HTMLAttributes, FC, ReactNode, useContext, useEffect
 import { useMediaQuery } from "react-responsive";
 
 // Context
-import { SiteContext } from "../context/site.context";
+import { SiteContext } from "../../context/site.context";
 
 // Component
 import Image from "next/image";
