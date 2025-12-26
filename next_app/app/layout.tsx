@@ -1,5 +1,5 @@
-// Tailwind and custom colors import
 import "./globals.css";
+import { SiteContextProvider } from "./context/site.context";
 
 export default function RootLayout({
   children,
@@ -9,7 +9,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black overflow-x-hidden">
-        {children}
+        <SiteContextProvider>
+          {children}
+        </SiteContextProvider>
       </body>
     </html>
   );
