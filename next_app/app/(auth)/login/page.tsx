@@ -18,11 +18,11 @@ export default function LoginPage() {
         <div 
             className="h-fit w-full backdrop-blur-xl bg-link-blue/10 overflow-hidden pt-5 pb-4 px-5 rounded-3xl border-1 border-zinc-700"
         >
-            <BackBtn className="absolute top-3 left-4 w-[100px]"/>  
+            <BackBtn className="absolute top-3 left-4 w-[100px]"/>
             <div className="w-full flex justify-center mb-6">
                 <Image 
                     width={90} 
-                    height={90} 
+                    height={90}
                     src="/logo.png" 
                     alt="#logo"
                     className="bg-transparent"
