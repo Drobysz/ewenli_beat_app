@@ -1,17 +1,33 @@
+import { roles } from "@/interfaces/UserData.interface";
 import apiBaseUrl from "./apiBaseUrl";
 
-export async function getCategoryList() {
-    const categories = await fetch(apiBaseUrl + '/api/categories', {
-        method: "GET",
-        headers:{
-            "Content-Type" : "application/json"
-        },
-        next: {
-            revalidate: 3600
-        }
-    }).then(res => res.json());
+interface ManipBeatProps {
+    token: string,
+    id: number,
+    role: roles
+}
 
-    return categories;
+export async function getCategoryList() {
+    try {
+        const categories = await fetch(apiBaseUrl + '/api/categories', {
+            method: "GET",
+            headers:{
+                "Content-Type" : "application/json"
+            },
+            next: {
+                revalidate: 3600
+            }
+        }).then(res => {
+            if (!res.ok)
+                throw new Error(`HTTP ${res.status}`);
+            return res.json()
+        });
+
+        return categories;
+    } catch (error) {
+        console.log(error)
+        return undefined;
+    }
 }
 
 export async function getProducts() {
@@ -25,25 +41,23 @@ export async function getProducts() {
                 revalidate: 3600
             }
         }).then(res => {
-            console.log('[SSR] GET /beats status:', res.status, 'url:', apiBaseUrl + '/api/beats');
-            if (!res.ok) {
+            // console.log('[SSR] GET /beats status:', res.status, 'url:', apiBaseUrl + '/api/beats');
+            if (!res.ok)
                 throw new Error(`HTTP ${res.status}`);
-    }
             return res.json()
         });
 
         return Beats;
     } catch (error) {
         console.log(error)
-        return[];
-    }
-    
+        return undefined;
+    }   
 }
 
 export async function setProduct(token: string, id: number) {
     fetch(apiBaseUrl + `/api/inventory/${id}`, {
         method: "POST",
-        headers:{
+        headers: {
             'Authorization': `Bearer ${token}`,
             "Content-Type" : "application/json"
         }
@@ -63,10 +77,20 @@ export async function getPurchasedProducts(token: string) {
             }
         }).then(res => res.json());
 
-    return res;
+        return res;
     } catch (error) {
         console.log(error)
         return undefined;
     }
-    
+}
+
+export async function deleteProduct({id, role, token}: ManipBeatProps) {
+    if (role == 'admin')
+        fetch(apiBaseUrl + `/api/beats/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                "Content-Type" : "application/json"
+            }
+        })
 }

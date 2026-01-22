@@ -67,7 +67,7 @@ export const MaskContainer = ({
       <motion.div
         className={cn(
           "absolute rounded-3xl flex h-full w-full",
-          "z-100 items-center justify-center bg-white",
+          "items-center justify-center bg-white",
           "text-black text-6xl [mask-image:url(/mask.svg)]",
           "[mask-repeat:no-repeat]"
         )}

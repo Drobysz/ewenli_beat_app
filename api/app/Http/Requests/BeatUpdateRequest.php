@@ -22,9 +22,12 @@ class BeatUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|max:255',
-            'price' => 'integer',
-            'categories' => 'string'
+            'name'       => 'string|max:255',
+            'license'    => 'string',
+            'price'      => 'integer',
+            'categories' => 'string',
+            'image'      => 'image|max:5120',
+            'audio'      =>' file|mimes:audio/mpeg,mpga,mp3,wav,aac'
         ];
     }
 }

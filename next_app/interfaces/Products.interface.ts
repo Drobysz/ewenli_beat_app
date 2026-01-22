@@ -13,6 +13,10 @@ export interface Beat {
     id: number,
     name: string,
     price: number,
+    prices: {
+        MP3: number,
+        Wav: number,
+        Trackout: number
+    },
     categories: Categories
-    stripe_price_id: string;
 }

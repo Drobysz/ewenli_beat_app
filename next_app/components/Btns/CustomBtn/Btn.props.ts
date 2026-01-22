@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 export interface BtnProps extends HTMLMotionProps<'button'> {
     size?: 'small' | 'medium' | 'large',
     color: 'white' | 'blue' | 'gray-ghost' | 'blue-ghost' | 'red-ghost',
-    icon?: 'basket' | 'arrow',
+    icon?: 'basket' | 'arrow' | 'none',
     btnType?: 'basket' | 'delete' | 'link' | 'buy',
     link?: string,
     children?: ReactNode,

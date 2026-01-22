@@ -1,7 +1,7 @@
 .wrapper {
     display: grid;
     background-color: #0a0a0a;
-    grid-template-columns: auto minmax(320px, 1440px) auto;
+    grid-template-columns: 1fr minmax(320px, 1440px) 1fr;
     grid-auto-rows: auto 1fr auto;
     min-height: 100vh;
     grid-template-areas: 
@@ -29,7 +29,7 @@
 
 // Mobile layout
 
-@media (max-width: 1440px) {
+@media (max-width: 400px) {
     .wrapper {
         grid-template-columns: minmax(320px, 1fr);
         grid-template-areas: 

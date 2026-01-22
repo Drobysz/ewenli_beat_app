@@ -17,13 +17,13 @@ interface OpacityWrapperInterface extends DetailedHTMLProps<HTMLAttributes<HTMLD
 }
 
 export const OpacityWrapper: FC<OpacityWrapperInterface> = ({children, className, ...props})=> {
-    const { isModalWindowOpen } = useContext(SiteContext)
+    const { currentModalWindow } = useContext(SiteContext)
 
     return (
         <div 
             {...props}
             className={cn(className, { 
-            ['pointer-events-none blur-sm']: isModalWindowOpen
+            ['pointer-events-none blur-sm']: currentModalWindow != "none"
             })}
         >
             {children}

@@ -17,10 +17,14 @@ class Beat extends Model
     ];
 
     public function basketUsers() {
-        return $this->belognsToMany(User::class, 'baskets');
+        return $this->belongsToMany(User::class, 'baskets');
     }
 
     public function inventoryUsers() {
-        return $this->belognsToMany(User::class, 'inventories');
+        return $this->belongsToMany(User::class, 'inventories');
+    }
+
+    public function pricesLicenses() {
+        return $this->belongsToMany(License::class, 'prices')->withPivot('price');
     }
 }

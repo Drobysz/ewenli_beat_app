@@ -27,10 +27,12 @@ class BeatStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'price' => 'required|integer',
-            'categories' => 'required|string'
-            // 'categories' => [ 'required', [Rule::enum(Categories::class)] ]
+            'name'       => 'required|string|max:255',
+            'prices'     => 'required|array|size:3',
+            'prices.*'   => 'integer',
+            'categories' => 'required|string',
+            'image'      => 'required|image|max:5120',
+            'audio'      => 'required|file|mimes:audio/mpeg,mpga,mp3,wav,aac'
         ];
     }
 }

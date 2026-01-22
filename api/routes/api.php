@@ -37,13 +37,13 @@ Route::patch('/change-nickname', [UserController::class, 'changeNickname']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get ('inventory',       [InventoryController::class, 'index']);
     Route::post('inventory/{id}',  [InventoryController::class, 'store']);
-    Route::apiResource('basket',    BasketController::class)   ->only(['index', 'store', 'destroy']);
+    Route::apiResource('basket',   BasketController::class)->only(['index', 'store', 'destroy']);
 });
 
 // S3 storage routes
 Route::prefix('lib')->group( function() {
-    Route::get('beat_imgs',      [S3ImagesController::class, 'index']);
-    Route::get('beat_mp3_files', [S3BeatsController::class,  'index']);
+    Route::apiResource('beat_imgs', S3ImagesController::class)->only(['index', 'store']);
+    Route::get('beat_mp3_files',    [S3BeatsController::class,  'index']);
 });
 
 // Stripe session route

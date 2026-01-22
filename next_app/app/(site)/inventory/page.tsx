@@ -1,6 +1,6 @@
 import { getPurchasedProducts } from "@/helpers/productsRequest";
 import { FullScreenSpin } from "@/components/index";
-import { LicenseWindow, Title, InventoryList, Items } from "./page/index";
+import { Title, InventoryList, Items } from "./page/index";
 import { Beat } from "@/interfaces/Products.interface";
 import { BeatUrl } from "@/interfaces/s3ElementData.interface";
 import { UserSession } from "@/interfaces/UserData.interface";
@@ -38,7 +38,6 @@ export default async function InventoryPage () {
                     imgs={purchasedBeatsImgs}
                 />
             </InventoryList>
-            <LicenseWindow />
         </div>
     );
 };

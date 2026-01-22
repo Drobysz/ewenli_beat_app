@@ -6,42 +6,40 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 // Stripe
-use Stripe\Stripe;
+use Stripe\StripeClient;
 use Stripe\Exception\InvalidRequestException;
-use Stripe\Checkout\Session as CheckoutSession;
+
+use Illuminate\Support\Facades\Storage;
 
 // Model
 use App\Models\{
     Beat,
-    User
+    User,
+    License
 };
 
 class StripeController extends Controller
 {
     public function createCheckoutSession(Request $request){
         $validated = $request->validate([
-            'stripe_price_id' => 'required|string',
-            'email'           => 'required|email'
+            'license' => 'required|string',
+            'email'   => 'required|email',
+            'beat_id' => 'required|integer'
         ]);
 
-        $price_id = $validated['stripe_price_id'];
-        $email    = $validated['email'];
-        $beat_id  = Beat::where('stripe_price_id', $price_id)
-                        ->firstOrFail()
-                        ->id;
+        $beat  = Beat::findOrFail($validated['beat_id']);
+        $url   = Storage::disk('s3')->url("song-covers/{$beat->name}.png");
+        $price = $beat->pricesLicenses->firstWhere('license_name', $validated['license'])?->pivot->price;
+        $stripe = new StripeClient(config('services.stripe.secret'));
 
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-
-        $checkout_session = CheckoutSession::create([
-            'customer_email' => $email,
-            'line_items' => [[
-                'price'    => $price_id,
-                'quantity' => 1,
-            ]],
-            'mode'        => 'payment',
-            'success_url' => env('APP_FRONT_URL') . "/success?session_id={CHECKOUT_SESSION_ID}&price_id={$beat_id}",
-            'cancel_url'  => env('APP_FRONT_URL') . '/cancel',
-        ]);
+        $checkout_session = $this->makeBill(
+            $stripe,
+            $price,
+            $beat,
+            $validated['license'],
+            $url,
+            $validated['email']
+        );
 
         return response()->json([ 'url' => $checkout_session->url ]);
     }
@@ -50,8 +48,10 @@ class StripeController extends Controller
         $validated = $request->validate([
             'session_id' => 'required|string'
         ]);
+
         $session_id = $validated['session_id'];
         Stripe::setApiKey(env('STRIPE_SECRET'));
+
         try {
             $session = CheckoutSession::retrieve($session_id);
         } catch (InvalidRequestException $e) {
@@ -63,5 +63,42 @@ class StripeController extends Controller
         }
 
         return response()->json(['valid' => true]);
+    }
+
+    private function makeBill(
+        StripeClient $stripe,
+        int $price,
+        Beat $beat,
+        string $license,
+        string $url,
+        string $email
+    ) {
+        $checkout_session = $stripe->checkout->sessions->create([
+            'customer_email' => $email,
+            'line_items' => [[
+                'quantity' => 1,
+                'price_data' => [
+                    'currency'     => 'eur',
+                    'unit_amount'  => $price * 100,
+                    'product_data' => [
+                        'name'   => "{$beat->name} — {$license} license",
+                        'images' => $url ? [$url] : [],
+                    ],
+                ],
+            ]],
+            'mode'             => 'payment',
+            'invoice_creation' => ['enabled' => true],
+
+            'success_url' => env('APP_FRONT_URL') . "/success?session_id={CHECKOUT_SESSION_ID}&beat_id={$beat->id}",
+            'cancel_url'  => env('APP_FRONT_URL') . '/cancel',
+
+            'metadata' => [
+                'beat_id'   => $beat->id,
+                'beat_name' => $beat->name,
+                'license'   => $license,
+            ],
+        ]);
+
+        return $checkout_session;
     }
 }

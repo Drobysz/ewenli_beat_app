@@ -1,7 +1,7 @@
 'use client'
 
 // Props
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 import { BtnProps } from "./Btn.props";
 
 // Fonst
@@ -25,9 +25,12 @@ import { createStripeSession } from "@/helpers/stripeRequest";
 import { getSessionData } from "@/app/actions/sesssions";
 import { UserSession } from "@/interfaces/UserData.interface";
 
-export const CustomBtn: FC<BtnProps> = ({
+// Styles
+import styles from "./Btn.module.scss";
+
+export const CustomBtn = ({
     size='medium', 
-    color, 
+    color='gray-ghost', 
     children,
     className, 
     idx, 
@@ -37,11 +40,12 @@ export const CustomBtn: FC<BtnProps> = ({
     link='#', 
     rgb=false, 
     setDisplayState
-})=> {
+}: BtnProps)=> {
     const colorSet  = [ '#13FFAA', '#1E67C6', '#CE84CF', '#DD335C' ];
     const RGBcolor  = useMotionValue(colorSet[0]);
     const border    = useMotionTemplate`1px solid ${RGBcolor}`;
     const boxShadow = useMotionTemplate`0px 4px 25px ${RGBcolor}`;
+    console.log(styles)
 
     useEffect(()=>{
         animate(RGBcolor, colorSet, {
@@ -90,45 +94,41 @@ export const CustomBtn: FC<BtnProps> = ({
                 border:    rgb ? border : undefined,
                 boxShadow: rgb ? boxShadow : undefined
             }}
-            className={cn('flex items-center justify-center gap-[3px] cursor-pointer', className, {
+            className={cn('cursor-pointer', className, styles.white, {
                 // Sizes
-                ['text-lg rounded-lg px-6 py-3 max-h-3 max-[580px]:text-[0.6rem] max-[580px]:py-2 max-[580px]:px-3']: size==='small',
-
-                ['text-xl rounded-xl px-[0.563rem] py-1.5']: size==='medium',
-
-                ['text-6xl rounded-3xl px-[1.375rem] py-2.5 max-[1055px]:text-2xl max-[1055px]:rounded-2xl max-[1055px]:px-[0.938rem] max-[1055px]:py-1']: size==='large',
+                [styles.small]:  size === 'small',
+                [styles.medium]: size === 'medium',
+                [styles.large]:  size === 'large',
 
                 // Colors
-                [cn(impact.className, 'text-black bg-white')]: color==='white',
-
-                [cn('text-white bg-blue rounded-xl hover:bg-blue/50 hover:text-white/50 active:scale-97 active:rotate-1 transition-all duration-300', bebas_neue.className)]: color==='blue',
-
-                [cn(courier_prime.className,'text-white bg-transparent backdrop-blur-2xl border-2 border-gray-700 min-[1280px]: px-0 py-0')]: color==='gray-ghost',
-
-                [cn('text-blue rounded-md bg-transparent border-1 border-blue px-2', bebas_neue.className)]: color==='blue-ghost',
-
-                [cn('text-red-proj border-1 border-red-proj text-xl', bebas_neue.className)]: color==='red-ghost',
+                [cn(impact.className, styles.white)]: color == 'white',
+                [cn(bebas_neue.className, styles.blue)]: color == 'blue',
+                [cn(courier_prime.className, styles.gray_ghost)]: color == 'gray-ghost',
+                [cn(bebas_neue.className, styles.blue_ghost)]: color == 'blue-ghost',
+                [cn(
+                    bebas_neue.className,
+                    'text-red-proj border-red-proj',
+                    styles.red_ghost
+                )]: color == 'red-ghost',
 
                 // Icons
-                ['hidden rotate-180 max-[710px]:block']: icon === 'arrow',
-                ['active:border-green-500']: btnType === 'basket',
+                [styles.arrow]: icon     === 'arrow',
+                [styles.basket]: btnType === 'basket',
+                [styles.icon]: icon      != 'none'
 
             })}
         >
             {children}
 
-            {/* Condition of icon appearing */}
-            {
-                icon !== 'none' && (
-                    <Image 
-                        src={`./${icon}.svg`} 
-                        width={26} 
-                        height={26} 
-                        alt="icon" 
-                        onClick={handleBtnClick}
-                    />
-                )
-            }
+            {icon !== 'none' && (
+                <Image 
+                    src={`./${icon}.svg`} 
+                    width={26} 
+                    height={26} 
+                    alt="icon" 
+                    onClick={handleBtnClick}
+                />
+            )}
         </motion.button>
     );
 };

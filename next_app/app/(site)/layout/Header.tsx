@@ -13,7 +13,7 @@ type HeaderProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElem
 
 export async function Header ({className}: HeaderProps) {          
   return (
-    <header className={cn(className, "flex sticky justify-between items-center h-[75px] border-b-1 border-b-[#2c2c2c] px-10 backdrop-blur-2xl max-[790px]:px-3")}>
+    <header className={cn(className, "flex sticky justify-between items-center h-[75px] border-b-1 border-b-[#2c2c2c] px-10 backdrop-blur-2xl max-[790px]:px-3 z-30")}>
       <div className="flex items-end">
         <Link href='/'>
           <Image 

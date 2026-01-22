@@ -2,18 +2,18 @@ import { CustomBtn } from "@/components/index";
 
 export const BtnBar = ()=> {
 	return (
-		<div className="flex gap-5 max-[420px]:flex-col max-[420px]:gap-2">
+		<div className="flex gap-3 max-[420px]:flex-col max-[420px]:gap-2">
 			<CustomBtn 
-				size="large"
+				size="medium"
 				color="white"
 			>
 				telegram
 			</CustomBtn>
 
 			<CustomBtn 
-			size="large" 
-			color="gray-ghost"
-			link="/shop"
+				size="medium" 
+				color="gray-ghost"
+				link="/shop"
 			>
 				shop
 			</CustomBtn>
