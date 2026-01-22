@@ -5,7 +5,8 @@ import { CrossProps } from "./Cross.props";
 
 export const Cross = ({ 
 	className,
-	width
+	width,
+	heigth
  }: CrossProps)=> {
 	return (
 		<Image
@@ -15,7 +16,7 @@ export const Cross = ({
 			)}
 			src='/cross.svg'
 			width={width}
-			height={width}
+			height={heigth ?? width}
 			alt='cross'
 		/>
 	)
