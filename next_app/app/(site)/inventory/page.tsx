@@ -30,7 +30,7 @@ export default async function InventoryPage () {
     }
 
     return (
-        <div className="h-[100vh] overflow-y-scroll">
+        <div className="h-screen overflow-y-scroll">
             <Title />
             <InventoryList>
                 <Items 

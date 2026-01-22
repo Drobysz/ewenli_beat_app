@@ -5,7 +5,7 @@ export const IntroTitle = ()=> {
 	return (
 		<h1 className={ cn(
 			"flex flex-col items-center text-5xl",
-			"text-transparent bg-gradient-to-br from-gold to-pinkish",
+			"text-transparent bg-linear-to-br from-gold to-pinkish",
 			"bg-clip-text leading-18 max-[690px]:text-3xl",
 			"max-[690px]:leading-12 max-[550px]:leading-10",
 			"max-[425px]:text-2xl max-[425px]:leading-8",

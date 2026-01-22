@@ -20,7 +20,7 @@ export const AsideBtn = ({ color, isOpened, setBtn, className }: AsideBtnProps)=
 						  'hover:scale-105 hover:border-gold',
 						  'ease-in-out transition-colors duration-500',
 						  'flex-col justify-between',
-						  'border-2 py-[0.3rem] px-[0.25rem]',
+						  'border-2 py-[0.3rem] px-1',
 						  'cursor-pointer border-[#C6C3C3]',
 						  {['justify-center']: isOpened},
 						  className

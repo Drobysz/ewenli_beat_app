@@ -68,8 +68,8 @@ export const MaskContainer = ({
         className={cn(
           "absolute rounded-3xl flex h-full w-full",
           "items-center justify-center bg-white",
-          "text-black text-6xl [mask-image:url(/mask.svg)]",
-          "[mask-repeat:no-repeat]"
+          "text-black text-6xl mask-[url(/mask.svg)]",
+          "mask-no-repeat"
         )}
         style={{
           maskPosition: coord,

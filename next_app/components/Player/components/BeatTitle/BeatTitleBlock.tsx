@@ -16,8 +16,8 @@ export const BeatTitle = ({imgUrl, category, name}: BeatTitleProps)=> {
         )}>
             <div 
                 className={cn(
-                    "h-[45px] w-[45px] rounded-[0.5rem]",
-                    "border-1 border-white",
+                    "h-[45px] w-[45px] rounded-lg",
+                    "border border-white",
                     "max-[775px]:h-[37px] max-[775px]:w-[37px]"
                 )} 
 
@@ -39,9 +39,9 @@ export const BeatTitle = ({imgUrl, category, name}: BeatTitleProps)=> {
                 </span>
                 <span className={cn(
                         'text-white text-[0.625rem] px-1 py-0.5',
-                        'w-fit rounded-full bg-gray-100 border-1',
+                        'w-fit rounded-full bg-gray-100 border',
                         'border-white/60 max-[775px]:px-0.5',
-                        'max-[775px]:py-[1px] max-[775px]:text-[0.48rem]',
+                        'max-[775px]:py-px max-[775px]:text-[0.48rem]',
                         avenir.className
                 )}>
                     {category}

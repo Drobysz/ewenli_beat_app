@@ -16,7 +16,7 @@ export async function generateMetadata(){
 export default function LoginPage() {
     return (
         <div 
-            className="h-fit w-full backdrop-blur-xl bg-link-blue/10 overflow-hidden pt-5 pb-4 px-5 rounded-3xl border-1 border-zinc-700"
+            className="h-fit w-full backdrop-blur-xl bg-link-blue/10 overflow-hidden pt-5 pb-4 px-5 rounded-3xl border border-zinc-700"
         >
             <BackBtn className="absolute top-3 left-4 w-[100px]"/>
             <div className="w-full flex justify-center mb-6">

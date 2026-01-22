@@ -14,7 +14,7 @@ export const SocialAuthBtn: FC<SocialAuthBtnProps> = ({btnType, className}) => {
 
     return (
         <motion.div 
-            className={cn(className, "h-[44px] rounded-full border border-zinc-700 bg-gradient-to-br from-zinc-800/70 to-zinc-950/70 px-3 text-zinc-50 transition-all duration-300 before:absolute before:inset-0 before:-z-10 before:scale-[2.5] before:rounded-[100%] before:bg-zinc-100 before:transition-transform before:duration-500 hover:scale-105 hover:text-zinc-900 hover:before:translate-y-0 active:scale-100 py-3 overflow-hidden flex justify-center items-center",{
+            className={cn(className, "h-[44px] rounded-full border border-zinc-700 bg-linear-to-br from-zinc-800/70 to-zinc-950/70 px-3 text-zinc-50 transition-all duration-300 before:absolute before:inset-0 before:-z-10 before:scale-[2.5] before:rounded-[100%] before:bg-zinc-100 before:transition-transform before:duration-500 hover:scale-105 hover:text-zinc-900 hover:before:translate-y-0 active:scale-100 py-3 overflow-hidden flex justify-center items-center",{
                 ['before:translate-y-[200%]']: btnType === 'google',
                 ['before:translate-y-[-200%]']: btnType === 'github'
             })}

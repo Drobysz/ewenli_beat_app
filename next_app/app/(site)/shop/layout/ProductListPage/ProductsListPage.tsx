@@ -30,8 +30,8 @@ export const ProductsListPage = ({ beats, beatImages, beatFiles, ...props }: Pro
         <section
             {...props}
             className={cn(
-                "border-t-1 border-l-1 border-dashed border-gray-700",
-                "h-[100vh] box-border px-5 py-6",
+                "border-t border-l border-dashed border-gray-700",
+                "h-screen box-border px-5 py-6",
                 "max-[510px]:py-3 max-[510px]:px-2 justify-center"
             )}
         >

@@ -19,7 +19,7 @@ export default function FailedPaymentPage () {
 
     return (
         <main className={cn(
-            "h-[100vh] flex",
+            "h-screen flex",
             "justify-center items-center"
         )}>
             <CancelTitle>

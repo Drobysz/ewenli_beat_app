@@ -9,7 +9,7 @@ import cn from 'classnames';
 export default function RegisterPage() {
     return (
         <div 
-            className="h-fit w-full backdrop-blur-xl bg-link-blue/10 overflow-hidden pt-5 pb-3 px-5 rounded-3xl border-1 border-zinc-700"
+            className="h-fit w-full backdrop-blur-xl bg-link-blue/10 overflow-hidden pt-5 pb-3 px-5 rounded-3xl border border-zinc-700"
         >
             <BackBtn className="absolute top-3 left-4 w-[100px]"/>
             

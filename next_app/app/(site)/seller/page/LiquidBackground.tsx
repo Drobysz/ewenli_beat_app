@@ -5,7 +5,7 @@ export const LiquidBackground = ()=> {
 	return (
 		<div className={cn(
 			"absolute inset-0 z-1 overflow-hidden",
-			"w-[100vw] h-[120vh] max-[550px]:h-[85vh]"
+			"w-screen h-[120vh] max-[550px]:h-[85vh]"
 		)}>
 			<div
 				style={{

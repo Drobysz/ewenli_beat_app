@@ -42,7 +42,7 @@ export const VerticalCarousel: FC<VerticalCarouselProps> = () => {
                 className='w-full h-5 sticky origin-left z-10 top-18'
             ></motion.div>
             {/* Cabin */}
-            <div className="sticky top-0 flex items-center h-[100vh] w-full">
+            <div className="sticky top-0 flex items-center h-screen w-full">
                 <div className="w-full h-[80vh] grid grid-cols-[1fr_1fr] overflow-hidden">
 
                     {/* Transition setup for 2 divs */}

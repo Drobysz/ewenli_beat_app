@@ -23,9 +23,9 @@ export const BeatBoxTitle = ({name, category, isHovered}: BeatBoxTitleProps)=> {
 			})}> | </span>
 			<span className={cn(
 				'text-center h-fit',
-				'w-fit rounded-full bg-gray-100 border-1',
+				'w-fit rounded-full bg-gray-100 border',
 				'border-white/60 px-0.5 mb-0.5',
-				'py-[1px] text-[0.48rem] max-[580px]:mt-1',
+				'py-px text-[0.48rem] max-[580px]:mt-1',
 				avenir.className, {
 				['text-white/60 bg-gray-100/60']: isHovered
 			})}>

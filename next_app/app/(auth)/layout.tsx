@@ -9,7 +9,7 @@ export default function AuthLayout({
   return (
     <AuthContextProvider>
       <Aurora2>
-        <div className="relative flex items-center justify-center min-h-[100vh] max-w-[500px]">
+        <div className="relative flex items-center justify-center min-h-screen max-w-[500px]">
           {children}
         </div>
       </Aurora2>

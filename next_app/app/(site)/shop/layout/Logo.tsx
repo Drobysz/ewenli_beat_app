@@ -11,7 +11,7 @@ export const Logo = ({...props}: LogoProps)=> {
             {...props}
             className={cn(
                 "flex justify-center items-center",
-                "border-r-1 border-b-1 border-dashed",
+                "border-r border-b border-dashed",
                 "box-border border-gray-700"
             )}
         >

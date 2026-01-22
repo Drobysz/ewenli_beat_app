@@ -15,7 +15,7 @@ export const BeatBoxImg = ({
     return (
         <div 
             className={cn(
-                "relative h-full w-[82px] rounded-[0.5rem]",
+                "relative h-full w-[82px] rounded-lg",
                 "max-[580px]:w-[54px] max-[580px]:h-[54px]",
                 "cursor-pointer"
             )}
@@ -29,7 +29,7 @@ export const BeatBoxImg = ({
         >
             <div 
                 className={cn(
-                    "h-full w-full flex justify-center rounded-[0.5rem]",
+                    "h-full w-full flex justify-center rounded-lg",
                     "items-center transition-all duration-500",{
                     ['hidden']: isHovered === false,
                     ['absolute bg-black/40']: isHovered,

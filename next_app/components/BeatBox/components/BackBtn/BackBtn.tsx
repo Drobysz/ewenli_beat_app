@@ -13,7 +13,7 @@ export const BackBtn: FC<BackBtnProps> = ({className}) => {
         <motion.div className={cn(
             "h-[34px] text-xs flex items-center justify-center",
             "gap-2 rounded-full border border-zinc-700",
-            "bg-gradient-to-br from-zinc-800/30 to-zinc-950/30 text-zinc-50",
+            "bg-linear-to-br from-zinc-800/30 to-zinc-950/30 text-zinc-50",
             "transition-all duration-1600 before:absolute before:inset-0",
             "before:-z-10 before:translate-x-[200%] before:scale-[2.5]",
             "before:rounded-[100%] before:bg-zinc-100 before:transition-transform",

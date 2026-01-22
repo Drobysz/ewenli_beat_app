@@ -84,9 +84,9 @@ export const Player = ()=> {
 
     return (
         <div className={cn(
-            'fixed bottom-0 z-10 w-[100vw] h-15',
-            'grid grid-cols-[auto_minmax(320px,_1000px)_auto]',
-            'bg-gray-500 border-t-1 border-t-gray-700 pr-2', {
+            'fixed bottom-0 z-10 w-screen h-15',
+            'grid grid-cols-[auto_minmax(320px,1000px)_auto]',
+            'bg-gray-500 border-t border-t-gray-700 pr-2', {
             ['hidden']: isPlayerVisible === false
         })}>
             <div />

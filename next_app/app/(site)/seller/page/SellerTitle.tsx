@@ -4,7 +4,7 @@ import cn from 'classnames';
 export const SellerTitle = ()=> {
 	return (
 		<div className={cn(
-			"h-[100vh] max-[550px]:h-[85vh]",
+			"h-screen max-[550px]:h-[85vh]",
 			"z-2 w-full absolute inset-0 flex",
 			"flex-col justify-center items-center",
 			"gap-10 mb-30"

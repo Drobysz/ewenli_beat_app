@@ -26,7 +26,7 @@ export const AuroraRGB = () => {
 
     return (
         <motion.section
-            className="w-[100vw] h-[750px] absolute top-0 -z-1"
+            className="w-screen h-[750px] absolute top-0 -z-1"
             style={{
                 backgroundImage: backgroundImage
             }} 

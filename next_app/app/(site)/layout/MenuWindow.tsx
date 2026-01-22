@@ -38,7 +38,7 @@ export const MenuWindow: FC<MenuWindowProps> = ()=> {
 
     return (
         <ul
-            className={cn("fixed z-100 min-[790px]:hidden h-[100vh] w-[100vw] bg-white flex flex-col gap-4 justify-center items-center", {
+            className={cn("fixed z-100 min-[790px]:hidden h-screen w-screen bg-white flex flex-col gap-4 justify-center items-center", {
                 ['hidden']: isMenuWindowOpen === false,
                 ['block']: isMenuWindowOpen === true,
             })}

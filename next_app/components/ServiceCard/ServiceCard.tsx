@@ -38,7 +38,7 @@ export const ServiceCard = ({ title, description, img }: ServiceCardProps) => {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                 }} 
-                className="w-full h-[257px] bg-gray-100 border-b-1 border-b-gray-200" 
+                className="w-full h-[257px] bg-gray-100 border-b border-b-gray-200" 
             />
 
             {/* Extandable Container with text content*/}
