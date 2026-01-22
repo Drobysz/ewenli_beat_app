@@ -1,0 +1,16 @@
+@reference "tailwindcss";
+
+.page_section {
+	@apply h-full flex
+		justify-center flex-col
+		gap-10 items-center;
+}
+
+.welcome {
+	@apply flex flex-col
+		gap-4 items-center;
+}
+
+.title {
+	@apply text-center text-xl font-bold;
+}
