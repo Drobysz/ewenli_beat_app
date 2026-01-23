@@ -2,28 +2,24 @@
 
 // sizes
 
-.small {
-	@apply text-lg rounded-lg px-6 py-3
-		max-h-3 max-[580px]:text-[0.6rem]
-		max-[580px]:py-2
-		max-[580px]:px-3;
+.default {
+	@apply cursor-pointer h-fit w-fit
+		transition-all duration-300 ease-in-out;
 }
 
-.test {
-	color: red;
+.small {
+	@apply text-base rounded-xl
+		px-3 py-0.75 leading-none;
 }
 
 .medium {
-	@apply text-lg rounded-xl
-		px-[0.563rem] h-fit;
+	@apply text-xl rounded-2xl
+		px-[0.563rem] py-1.5;
 }
 
 .large {
-	@apply text-xl rounded-3xl px-[1.375rem] py-2.5
-		max-[1055px]:text-2xl
-		max-[1055px]:rounded-2xl
-		max-[1055px]:px-[0.938rem]
-		max-[1055px]:py-1;
+	@apply text-2xl rounded-2xl
+		px-4 py-2;
 }
 
 
@@ -34,8 +30,8 @@
 }
 
 .blue {
-	@apply text-white bg-blue rounded-xl
-		hover:bg-blue/50 hover:text-white/50
+	@apply text-white rounded-xl
+		hover:text-white/50
 		active:scale-97 active:rotate-1
 		transition-all duration-300;
 }
@@ -43,13 +39,12 @@
 .gray_ghost {
 	@apply text-white bg-transparent
 		backdrop-blur-2xl border-2
-		border-gray-700 px-0 py-0;
+		border-gray-700;
 }
 
 .blue_ghost {
-	@apply text-blue rounded-md
-		bg-transparent border-1
-		border-blue px-2;
+	@apply rounded-md
+		bg-transparent border-1 px-2;
 }
 
 .red_ghost {

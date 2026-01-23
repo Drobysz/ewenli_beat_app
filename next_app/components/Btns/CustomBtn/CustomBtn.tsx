@@ -45,7 +45,6 @@ export const CustomBtn = ({
     const RGBcolor  = useMotionValue(colorSet[0]);
     const border    = useMotionTemplate`1px solid ${RGBcolor}`;
     const boxShadow = useMotionTemplate`0px 4px 25px ${RGBcolor}`;
-    console.log(styles)
 
     useEffect(()=>{
         animate(RGBcolor, colorSet, {
@@ -94,7 +93,7 @@ export const CustomBtn = ({
                 border:    rgb ? border : undefined,
                 boxShadow: rgb ? boxShadow : undefined
             }}
-            className={cn('cursor-pointer', className, styles.white, {
+            className={cn(styles.default, className, {
                 // Sizes
                 [styles.small]:  size === 'small',
                 [styles.medium]: size === 'medium',
@@ -102,9 +101,15 @@ export const CustomBtn = ({
 
                 // Colors
                 [cn(impact.className, styles.white)]: color == 'white',
-                [cn(bebas_neue.className, styles.blue)]: color == 'blue',
+                [cn(
+                    bebas_neue.className, styles.blue,
+                    "bg-blue hover:bg-blue/50"
+                )]: color == 'blue',
                 [cn(courier_prime.className, styles.gray_ghost)]: color == 'gray-ghost',
-                [cn(bebas_neue.className, styles.blue_ghost)]: color == 'blue-ghost',
+                [cn(
+                    bebas_neue.className, styles.blue_ghost,
+                    "text-blue border-blue border-blue"
+                )]: color == 'blue-ghost',
                 [cn(
                     bebas_neue.className,
                     'text-red-proj border-red-proj',
