@@ -16,7 +16,8 @@ export const MaskBody = ({
 				"max-[1160px]:text-3xl max-[1055px]:leading-10",
 				"max-[960px]:text-2xl max-[960px]:leading-9",
 				"max-[670px]:text-base max-[670px]:leading-7",
-				"max-[580px]:text-sm max-[580px]:leading-6"
+				"max-[580px]:text-sm max-[580px]:leading-6",
+				"max-[420px]:text-xs max-[420px]:leading-4"
 			)}
 			revealText={revealText}
 		>

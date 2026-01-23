@@ -5,7 +5,7 @@ import { RotateObjHorizontally } from "@/components/index";
 export const DiskImg = ()=> {
 	return (
 		<RotateObjHorizontally className={cn(
-			"rounded-full aspect-square p-8",
+			"rounded-full aspect-square p-8 justify-self-center",
 			"max-[715px]:p-7 max-[550px]:p-4",
 			"max-[420px]:p-0"
 		)}>
