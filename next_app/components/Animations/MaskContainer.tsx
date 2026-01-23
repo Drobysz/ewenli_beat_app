@@ -41,6 +41,8 @@ export const MaskContainer = ({
   const y = mousePosition.y - maskSize / 2;
 
   useEffect(()=> {
+    if (windowWidth === null) return;
+
     if (windowWidth <= 450) {
       setRevSize(170);
     } else if (windowWidth <= 540) {
@@ -99,7 +101,8 @@ export const MaskContainer = ({
  
       <div className={cn(
         "flex h-full w-full",
-        "items-center justify-center"
+        "items-center justify-center",
+        "pl-5 py-3"
       )}>
         {revealText}
       </div>
